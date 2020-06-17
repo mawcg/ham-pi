@@ -1,0 +1,16 @@
+#!/bin/bash
+
+############################################################################################################################
+# rtc-step1
+#
+# Script to setup and install a Real Time Clock Chip (RTC).  This is step one of two.  We first need to enable i2c and reboot
+# and after rebbot we can complete the RTC installation
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo sed -i 's/#dtparam=i2c_arm=on/dtparam=i2c_arm=on/' /boot/config.txt
+touch $HOME/RTC

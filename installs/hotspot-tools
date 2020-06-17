@@ -1,0 +1,17 @@
+#!/bin/bash
+
+############################################################################################################################
+# hotspot-tools
+#
+# Script to setup and install automatic hotspot tools
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+git clone https://github.com/km4ack/hotspot-tools.git $HOME/hotspot-tools
+cd $HOME/hotspot-tools
+git checkout dev
+bash setup

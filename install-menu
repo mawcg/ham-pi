@@ -1,0 +1,111 @@
+#!/bin/bash
+
+############################################################################################################################
+# install-menu
+#
+# Script to install Ham Radio Tools on the Raspberry Pi easily.
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo "Starting up, one moment..."
+
+############################################################################
+# make sure dialog is installed
+############################################################################
+apt-get install dialog
+
+############################################################################
+# Set dialog to default to graphical
+############################################################################
+#DIALOG=${DIALOG=Xdialog}
+DIALOG=${DIALOG=dialog}
+
+############################################################################
+# Define Some Needed Variables
+############################################################################
+INSTALLS=$HOME/.config/HamPi
+INSTALLLOG=$HOME/HamPi.log
+FULLAPPLIST=full-app-list
+NONXAPPLIST=non-x-app-list
+USEAPPLIST="$FULLAPPLIST"
+WINLINKAPPLIST=winlink-apps-list
+OURDIRECTORY=$HOME/ham-pi
+chmod -R 755 $OURDIRECTORY 
+
+
+############################################################################
+# First, check to see if we are being run from xWindows or Not
+############################################################################
+
+INTERFACE=$(printenv | grep DISPLAY)
+
+if [ -z "$INTERFACE" ]
+then
+DIALOG=${DIALOG=dialog}
+USEAPPLIST="$NONXAPPLIST"
+
+$DIALOG --backtitle "Ham-Pi Easy Install" --title " Non Graphical Installation" --clear --yesno "Before we get Started...  We have noticed that you are running the install script from a non graphical interface.  Many of the applications that are available to be installed require them to be run from xWindows graphical interface on the Raspberry Pi.  You can continue to run this script but you will only be presented with app that can run in this environment.  If you want to install the programs that require xWindows, click no below to quit this install and start it from a terminal window on the Pi's graphical desktop.  Continue?" 15 60
+
+case $? in
+  1)
+    $DIALOG --title "Installer Shutting Down" --infobox "The installer is shutting down...." 3 50; sleep 2
+    clear
+    exit
+    ;;
+  255)
+    $DIALOG --title "Installer Shutting Down" --infobox "The installer is shutting down...." 3 50; sleep 2
+    clear
+    exit
+    ;;
+esac
+
+fi
+
+
+############################################################################
+# Build our environment
+############################################################################
+
+
+############################################################################
+# Show Welcome
+############################################################################
+
+$DIALOG --backtitle "Ham-Pi Easy Install" --title " Welcome to Ham-Pi" --clear --msgbox "Hello and welcome to Ham-Pi.  This script makes it easy to isntall ham radio related software on your raspberry pi.  Here is how this works...  First you select the applications that you want to install.  Based upon the software you have selected, we will have some questions like your call sign, Grid Locator, and some other details.  Some of the questions may not be familliar to you so we have provided default answers that will work fine but are not as secure." 15 60
+
+
+
+############################################################################
+# Build our App List
+############################################################################
+
+APPLIST=$(
+cat $USEAPPLIST | while read -r line; do
+  echo -n "$line "
+done)
+
+echo 'dialog --backtitle "Ham-Pi Easy Install" --title "Select Applications To Install" \' > apppicklist
+echo '--checklist "Please select the applications you want to install below.  By default all applications are selected and if we detect that the application is already installed we have unchecked it." 25 70 16 \' >> apppicklist
+echo "$APPLIST" >> apppicklist
+echo "2>form.$$" >> apppicklist
+
+chmod 755 apppicklist
+./apppicklist
+
+
+############################################################################
+# Build our list of details we need to collect
+############################################################################
+
+dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
+--form "\nPlease fill out your details below" 25 60 16 \
+"Your Callsign:" 1 1 "" 1 25 25 30 \
+"Your Grid Square:" 2 1 "" 2 25 25 30 \
+"Database Username" 3 1 "hampi" 3 25 25 30 \
+"Database Password:" 4 1 "h@mP1Pa$$" 4 25 25 30 \
+2>form.$$
+

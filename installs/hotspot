@@ -1,0 +1,21 @@
+#!/bin/bash
+
+############################################################################################################################
+# Hotspot
+#
+# Script to setup and install an outmates hotspot
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $1
+wget https://raw.githubusercontent.com/km4ack/pi-scripts/master/autohotspotN-setup || echo "Can't download autohotspot script" >> $BUILDLOG
+chmod +x $1/autohotspotN-setup
+sudo $1/autohotspotN-setup
+echo "*/5 * * * * sudo /usr/bin/autohotspotN >/dev/null 2>&1" >> $3
+rm $1/autohotspotN-setup
+echo "Hot spot installed" >> $2
+

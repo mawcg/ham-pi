@@ -1,0 +1,34 @@
+#!/bin/bash
+DIALOG=${DIALOG=dialog}
+
+$DIALOG --backtitle "Ham-Pi Easy Install" --title " Welcome to Ham-Pi" --clear --msgbox "Hello and welcome to Ham-Pi.  We need to gather some information before we get started." 10 30
+
+dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
+--form "\nPlease fill out your details below" 25 60 16 \
+"Your Callsign:" 1 1 "" 1 25 25 30 \
+"Your Grid Square:" 2 1 "" 2 25 25 30 \
+"Database Username" 3 1 "hampi" 3 25 25 30 \
+"Database Password:" 4 1 "h@mP1Pa$$" 4 25 25 30 \
+2>form.$$
+
+APPLIST=$(
+cat allapps.txt | while read -r line; do
+  echo -n "$line "
+done)
+
+#dialog --backtitle "Ham-Pi Easy Install" --title "Select Applications To Install" \
+#--checklist "Please select the applications you want to install below" 25 60 16 \
+#"testapp1" "testing the applist method" on "testapp2" "testing the applist method2" on
+
+#dialog --backtitle "Ham-Pi Easy Install" --title "Select Applications To Install" \
+#--checklist "Please select the applications you want to install below" 25 60 16 \
+#$APPLIST 2>form.$$
+
+echo 'dialog --backtitle "Ham-Pi Easy Install" --title "Select Applications To Install" \' > apppicklist
+echo '--checklist "Please select the applications you want to install below" 25 60 16 \' >> apppicklist
+echo "$APPLIST" >> apppicklist
+echo "2>form.$$" >> apppicklist
+
+chmod 755 apppicklist
+./apppicklist
+

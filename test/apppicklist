@@ -1,0 +1,4 @@
+dialog --backtitle "Ham-Pi Easy Install" --title "Select Applications To Install" \
+--checklist "Please select the applications you want to install below" 25 60 16 \
+'testapp1' 'testing the applist method' on 'testapp2' 'testing the applist method2' on 
+2>form.25673

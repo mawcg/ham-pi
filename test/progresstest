@@ -1,0 +1,4 @@
+DIALOG=${DIALOG=dialog}
+USEAPPLIST="$NONXAPPLIST"
+
+du / | $DIALOG --backtitle "Ham-Pi Easy Install" --title " progress test"  --progressbox  20 70
