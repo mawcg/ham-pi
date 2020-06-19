@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# XASTIR
+# test
 #
-# Script to setup and install the XASTIR APRS Tool
+# Script to generate some output to test the menu-install without having to actually install something
 #
 # Author: Mike Myers (K3DO)
 #
@@ -11,5 +11,11 @@
 # http://mawcg.org
 ############################################################################################################################
 
-sudo apt-get install -y xastir
-sudo sed -i 's/Exec=xastir/Exec=sudo xastir/' /usr/share/applications/xastir.desktop
+du /
+
+echo "1: $1"
+echo "2: $2"
+echo "3: $3"
+echo "4: $4"
+
+sleep 10

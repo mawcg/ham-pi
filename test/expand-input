@@ -1,0 +1,6 @@
+IFS=' ' read -r -a myarray < selected-apps
+echo $myarray
+for i in "${myarray[@]}"
+do
+    echo $i
+done

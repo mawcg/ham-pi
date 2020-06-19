@@ -1,0 +1,4 @@
+DIALOG=${DIALOG=dialog}
+USEAPPLIST="$NONXAPPLIST"
+
+./systemupdate | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Updating System" --clear --progressbox 20 70

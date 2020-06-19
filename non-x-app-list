@@ -4,7 +4,7 @@
 'RTC' 'testing the applist method2' on
 'GPS' 'testing the applist method2' on
 'FLRIG' 'testing the applist method2' on
-'Field Day Logger' 'testing the applist method2' on
+'FieldDayLogger' 'testing the applist method2' on
 'Direwolf' 'testing the applist method2' on
 'AX25' 'testing the applist method2' on
 'HamLib' 'testing the applist method2' on
@@ -14,3 +14,4 @@
 'CQRLog' 'testing the applist method2' on
 'EES' 'testing the applist method2' on
 'GARIM' 'testing the applist method2' on
+'test' 'testing script that installs nothing' on

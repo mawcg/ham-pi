@@ -28,14 +28,30 @@ DIALOG=${DIALOG=dialog}
 # Define Some Needed Variables
 ############################################################################
 INSTALLS=$HOME/.config/HamPi
-INSTALLLOG=$HOME/HamPi.log
+INSTALLTEMP=$HOME/ham-pi-temp
+INSTALLOG=$HOME/HamPi.log
 FULLAPPLIST=full-app-list
 NONXAPPLIST=non-x-app-list
 USEAPPLIST="$FULLAPPLIST"
 WINLINKAPPLIST=winlink-apps-list
 OURDIRECTORY=$HOME/ham-pi
-chmod -R 755 $OURDIRECTORY 
 
+
+############################################################################
+# Start a new start location in the log
+############################################################################
+
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo "Ham-Pi Installation Started at `date`" >> $INSTALLOG
 
 ############################################################################
 # First, check to see if we are being run from xWindows or Not
@@ -71,6 +87,12 @@ fi
 ############################################################################
 
 
+mkdir -p $OURDIRECTORY
+mkdir -p $INSTALLTEMP
+
+chmod -R 755 $OURDIRECTORY 
+chmod -R 755 $INSTALLTEMP
+
 ############################################################################
 # Show Welcome
 ############################################################################
@@ -90,8 +112,8 @@ done)
 
 echo 'dialog --backtitle "Ham-Pi Easy Install" --title "Select Applications To Install" \' > apppicklist
 echo '--checklist "Please select the applications you want to install below.  By default all applications are selected and if we detect that the application is already installed we have unchecked it." 25 70 16 \' >> apppicklist
-echo "$APPLIST" >> apppicklist
-echo "2>form.$$" >> apppicklist
+echo "$APPLIST \\" >> apppicklist
+echo "2>selected-apps" >> apppicklist
 
 chmod 755 apppicklist
 ./apppicklist
@@ -113,7 +135,7 @@ dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
 "Your Grid Square:" 2 1 "" 2 25 25 30 \
 "Database Username" 3 1 "hampi" 3 25 25 30 \
 "Database Password:" 4 1 "h@mP1Pa$$" 4 25 25 30 \
-2>form.$$
+2>answers
 
 
 ############################################################################
@@ -123,10 +145,29 @@ dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
 
 
 ############################################################################
+# Update system to latest version
+############################################################################
+
+$installs/systemupdate $INSTALLOG | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Updating Local System" --clear --progressbox 20 70
+
+
+############################################################################
 # Install the selected components
 ############################################################################
 
+#loop through all of the selections and install them
+# install script parameters are Logfile, Temp Install Directory, Our Directory, Callsign
 
+IFS=' ' read -r -a myarray < selected-apps
+for i in "${myarray[@]}"
+do
+    #get application name and description for title
+    TITLE=`cat full-app-list | grep $i | cut -d' ' -f 1 | sed "s/'//g"`
+    DESC=`cat full-app-list | grep $i | cut -d' ' -f 2- | sed 's/on//g' | sed "s/'//g"`
+    installs/$TITLE $INSTALLLOG $INSTALLTEMP $OURDIRECTORY $CALLSIGN  | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Installing $TITLE - $DESC" --clear --progressbox 20 70
+done
+
+exit 0 
 
 ############################################################################
 # Instalations Complete, Cleanup time
@@ -138,8 +179,15 @@ crontab $TEMPCRON
 
 rm -rf $DIR
 
-#clean up downloads dir
-rm -rf $HOME/Downloads/*
+
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo "Ham-Pi Installation Started at `date`" >> $INSTALLOG
+echo " " >> $INSTALLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
 
 echo;echo;echo "rebooting in 5 seconds"
 sleep 5
