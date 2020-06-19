@@ -1,0 +1,22 @@
+#!/bin/bash
+
+############################################################################################################################
+# js8call
+#
+# Script to setup and install the js8call digital tools
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $DIR
+JS8LATE=$(curl -s http://files.js8call.com/latest.html | grep armhf | awk '{ print $2 }' | sed 's/href=//' | sed 's/"//g')
+JS8PKG=$(curl -s http://files.js8call.com/latest.html | grep armhf | awk '{ print $2 }' | sed 's/\///g' | sed 's/href="http:files.js8call.com[0-9].[0-9].[0-9]//' | sed 's/"//')
+wget $JS8LATE || echo "Can't Download JS8Call" >> $BUILDLOG
+sudo dpkg -i $JS8PKG
+sudo apt-get --fix-broken -y install
+sudo dpkg -i $JS8PKG
+echo "JS8Call installed" >> $BUILDLOG
+

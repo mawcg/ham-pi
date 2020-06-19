@@ -1,0 +1,38 @@
+#!/bin/bash
+
+############################################################################################################################
+# yaac
+#
+# Script to setup and install the YAAC Tools
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $DIR
+wget https://www.ka2ddo.org/ka2ddo/YAAC.zip
+sudo apt-get install -y openjdk-8-jre librxtx-java
+mkdir -p $HOME/YAAC
+cd $HOME/YAAC
+touch YAAC
+echo "#!/bin/bash" >> YAAC
+echo "java -jar $HOME/YAAC/YAAC.jar" >> YAAC
+chmod +x YAAC
+#ln -sf $HOME/YAAC/YAAC $HOME/Desktop/YAAC
+#ln -sf $HOME/YAAC/YAAC $HOME/bin/YAAC
+cat > yaac.desktop <<EOF
+[Desktop Entry]
+Name=YAAC
+GenericName=YAAC
+Comment=APRS Client
+Exec=$HOME/YAAC/YAAC
+Terminal=false
+Type=Application
+Categories=Network;HamRadio;
+EOF
+
+sudo mv yaac.desktop /usr/share/applications/
+unzip $DIR/YAAC.zip
+

@@ -101,6 +101,12 @@ chmod 755 apppicklist
 # Build our list of details we need to collect
 ############################################################################
 
+
+
+
+############################################################################
+# Collect the needed details
+############################################################################
 dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
 --form "\nPlease fill out your details below" 25 60 16 \
 "Your Callsign:" 1 1 "" 1 25 25 30 \
@@ -108,4 +114,34 @@ dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
 "Database Username" 3 1 "hampi" 3 25 25 30 \
 "Database Password:" 4 1 "h@mP1Pa$$" 4 25 25 30 \
 2>form.$$
+
+
+############################################################################
+# Save answers for use later
+############################################################################
+
+
+
+############################################################################
+# Install the selected components
+############################################################################
+
+
+
+############################################################################
+# Instalations Complete, Cleanup time
+############################################################################
+
+sudo apt-get install -y extra-xdg-menus
+
+crontab $TEMPCRON
+
+rm -rf $DIR
+
+#clean up downloads dir
+rm -rf $HOME/Downloads/*
+
+echo;echo;echo "rebooting in 5 seconds"
+sleep 5
+#sudo reboot
 

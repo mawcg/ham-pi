@@ -1,0 +1,28 @@
+#!/bin/bash
+
+############################################################################################################################
+# pulse
+#
+# Script to setup and install the pulse audio tools
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt-get install -y pulseaudio
+sudo apt-get install -y pavucontrol
+echo "Pulse audio installed" >> $BUILDLOG
+
+cd $DIR
+cat > tempsound <<EOF
+pcm.pulse {
+	type pulse
+	}
+ctl.pulse {
+	type pulse
+	}
+EOF
+sudo chown root:root tempsound
+sudo mv tempsound /etc/asound.conf

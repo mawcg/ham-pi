@@ -1,0 +1,24 @@
+#!/bin/bash
+
+############################################################################################################################
+# conky
+#
+# Script to setup and install the conky desktop tool
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt install -y conky
+sudo apt-get install -y ruby2.3
+sudo gem install gpsd_client
+sudo gem install maidenhead
+cp $MYDIR/conky/.conkyrc $HOME/.conkyrc
+mkdir -p $HOME/bin/conky
+cp $MYDIR/conky/* $HOME/bin/conky/
+chmod +x $HOME/bin/conky/get-grid $HOME/bin/conky/temp-conv $HOME/bin/conky/get-freq $HOME/bin/conky/grid
+sed -i "s/N0CALL/$CALL/" $HOME/.conkyrc
+echo "@reboot sleep 20 && export DISPLAY=:0 && /usr/bin/conky" >> $TEMPCRON
+echo "CONKY installed" >> $BUILDLO

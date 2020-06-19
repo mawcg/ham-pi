@@ -1,0 +1,36 @@
+#!/bin/bash
+
+############################################################################################################################
+# gridtracker
+#
+# Script to setup and install the gridtracker tool for use with WSJTX
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $HOME
+sudo apt-get install -y libgconf-2-4
+GRIDDLL=$(curl -s https://tagloomis.com/downloads/ | grep Arm | head -1 | sed 's/<p><a\ href="//' | sed 's/?.*$//')
+wget $GRIDDLL
+GRIDTAR=$(echo $GRIDDLL | sed 's/.*\///g')
+tar -xzvf $GRIDTAR
+rm *.gz
+cat > gridtracker.desktop <<EOF
+[Desktop Entry]
+Name=GridTracker
+Comment=GridTracker
+GenericName=GridTracker, a WSJT-X Companion
+Exec=/home/pi/GridTracker/GridTracker --disable-accelerated-2d-canvas --num-raster-threads=2
+Icon=/home/pi/GridTracker/gridtracker.png
+Path=/home/pi/GridTracker
+Type=Application
+Encoding=UTF-8
+Terminal=false
+Categories=HamRadio;
+EOF
+
+sudo mv gridtracker.desktop /usr/share/applications/
+

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+############################################################################################################################
+# ardopgui
+#
+# Script to setup and install the gui interface for the ardop protocol for winlink
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+mkdir -p $HOME/ardop
+cd $HOME/ardop
+wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piARDOP_GUI || echo "Can't download piARDOP_GUI" >> $BUILDLOG
+sudo chmod +x $HOME/ardop/piARDOP_GUI
+cat > ardopgui.desktop <<EOF
+[Desktop Entry]
+Name=ARDOP GUI
+GenericName=ARDOP GUI
+Comment=Graphical User Interface for ARDOP modem
+Exec=$HOME/ardop/piARDOP_GUI
+Terminal=false
+Type=Application
+Categories=Network;HamRadio;
+EOF
+
+sudo mv ardopgui.desktop /usr/share/applications/
+FILE=$HOME/.config/G8BPQ/ARDOP_GUI.conf
+mkdir -p $HOME/.config/G8BPQ
+touch $FILE
+echo "[General]" >> $FILE
+echo "Host=local" >> $FILE
+echo "Port=8515" >> $FILE
+echo "ARDOP-GUI installed" >> $BUILDLOG

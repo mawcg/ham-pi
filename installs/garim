@@ -1,0 +1,23 @@
+#!/bin/bash
+
+############################################################################################################################
+# gARIM
+#
+# Script to setup and install the gARIM Chat tools
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $HOME
+sudo apt-get install -y fluid
+wget https://www.whitemesa.net/garim/src/garim-1.1.tar.gz
+tar xzvf garim-1.1.tar.gz
+rm garim-1.1.tar.gz
+cd $HOME/garim-1.1
+./configure
+make
+sudo make install
+

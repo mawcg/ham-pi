@@ -1,0 +1,28 @@
+#!/bin/bash
+
+############################################################################################################################
+# qsstv
+#
+# Script to setup and install the qsstv SSTV decoder software
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt-get install -y g++ libfftw3-dev qt5-default libpulse-dev libhamlib-dev libasound2-dev libv4l-dev libopenjp2-7 libopenjp2-7-dev
+
+cd $HOME/Downloads
+
+TAR=$(curl -s http://users.telenet.be/on4qz/qsstv/downloads/ | grep tar.gz | sed 's/.*href="//' | sed 's/">.*$//')
+wget http://users.telenet.be/on4qz/qsstv/downloads/$TAR
+SSTVTAR=$(echo $TAR | sed 's/.tar.gz//')
+tar -xvzf $TAR
+cd $SSTVTAR
+qmake
+make
+sudo make install
+
+sudo sed -i 's/Education;/Network;HamRadio;/' /usr/local/share/applications/qsstv.desktop
+

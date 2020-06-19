@@ -1,0 +1,13 @@
+#!/bin/bash
+
+############################################################################################################################
+# ardopgui
+#
+# Script to setup and install the gui interface for the ardop protocol for winlink
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+

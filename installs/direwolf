@@ -1,0 +1,23 @@
+#!/bin/bash
+
+############################################################################################################################
+# direwolf
+#
+# Script to setup and install the direwolf virtual tnc
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $HOME
+git clone https://www.github.com/wb2osz/direwolf || echo "Can't download DIREWOLF" >> $BUILDLOG
+cd $HOME/direwolf
+sudo apt-get install -y libasound2-dev
+make
+sudo make install
+make install-conf
+sed -i "s/N0CALL/$CALL/" "$HOME/direwolf.conf"
+sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' $HOME/direwolf.conf
+echo "DIREWOLF installed" >> $BUILDLOG

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+############################################################################################################################
+# flamp
+#
+# Script to setup and install the flamp digital application
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt install -y flamp
+echo "FLAMP installed repository" >> $BUILDLOG

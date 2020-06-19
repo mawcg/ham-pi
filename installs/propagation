@@ -1,0 +1,33 @@
+#!/bin/bash
+
+############################################################################################################################
+# propagation
+#
+# Script to setup and install the propagation gui tool
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt-get install -y gfortran yelp python3-gi python3-gi-cairo rarian-compat gnome-doc-utils pkg-config python3-dateutil python3-mpltoolkits.basemap python3-cairocffi libgtk-3-dev
+
+#install primary program
+cd $HOME/Downloads
+wget https://www.qsl.net/hz1jw/voacapl/downloads/voacapl-0.7.2.tar.gz
+tar -xzf voacapl-0.7.2.tar.gz
+cd voacapl-0.7.2
+./configure
+make
+sudo make install
+
+
+#install gui app for propagation reports
+cd $HOME/Downloads
+wget https://www.qsl.net/hz1jw/pythonprop/downloads/pythonprop-0.28.tar.gz
+tar -xzf pythonprop-0.28.tar.gz
+cd pythonprop-0.28
+./configure
+sudo make install
+

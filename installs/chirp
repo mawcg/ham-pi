@@ -1,0 +1,25 @@
+#!/bin/bash
+
+############################################################################################################################
+# chirp
+#
+# Script to setup and install the chirp radio programming software
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $DIR
+wget https://trac.chirp.danplanet.com/chirp_daily/LATEST/
+CHIRPBUILD=$(cat index.html | grep .tar.gz | grep chirp-daily- | awk '{ print $6 }' | sed 's/.*"//' | sed 's/>//' | sed 's/[<].*$//')
+sudo apt-get -y install python-gtk2 python-serial python-libxml2
+mkdir $HOME/chirp
+cd $HOME/chirp
+wget https://trac.chirp.danplanet.com/chirp_daily/LATEST/$CHIRPBUILD
+tar -xzf $CHIRPBUILD
+CHIRPDIR=$(echo $CHIRPBUILD | sed 's/[.].*$//')
+cd $CHIRPDIR
+sudo python setup.py install
+

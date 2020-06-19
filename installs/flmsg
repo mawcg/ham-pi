@@ -1,0 +1,15 @@
+#!/bin/bash
+
+############################################################################################################################
+# flmsg
+#
+# Script to setup and install the flmsg digital application
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt install -y flmsg
+echo "FLMSG installed repository" >> $BUILDLOG

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+############################################################################################################################
+# crqlog
+#
+# Script to setup and install the crqlog logging tool
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+sudo apt-get install -y cqrlog
+

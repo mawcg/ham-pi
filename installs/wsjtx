@@ -1,0 +1,20 @@
+#!/bin/bash
+
+############################################################################################################################
+# WSJTX
+#
+# Script to setup and install the WSJTX Digital Communication program
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+cd $DIR
+wget --no-check-certificate https://physics.princeton.edu/pulsar/k1jt/wsjtx_2.1.0_armhf.deb || echo "Can't download WSJTX" >> $BUILDLOG
+sudo dpkg -i wsjtx_2.1.0_armhf.deb
+sudo apt-get --fix-broken -y install
+sudo dpkg -i wsjtx_2.1.0_armhf.deb
+echo "WSJTX installed" >> $BUILDLOG
+
