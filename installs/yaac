@@ -11,7 +11,17 @@
 # http://mawcg.org
 ############################################################################################################################
 
-cd $DIR
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "YACC Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+cd $3
 wget https://www.ka2ddo.org/ka2ddo/YAAC.zip
 sudo apt-get install -y openjdk-8-jre librxtx-java
 mkdir -p $HOME/YAAC
@@ -22,6 +32,11 @@ echo "java -jar $HOME/YAAC/YAAC.jar" >> YAAC
 chmod +x YAAC
 #ln -sf $HOME/YAAC/YAAC $HOME/Desktop/YAAC
 #ln -sf $HOME/YAAC/YAAC $HOME/bin/YAAC
+
+#####################################
+# Create Desktop Icon
+#####################################
+
 cat > yaac.desktop <<EOF
 [Desktop Entry]
 Name=YAAC
@@ -34,5 +49,11 @@ Categories=Network;HamRadio;
 EOF
 
 sudo mv yaac.desktop /usr/share/applications/
-unzip $DIR/YAAC.zip
+unzip $3/YAAC.zip
 
+echo " " >> $1
+echo " " >> $1
+echo "YACC install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

@@ -11,9 +11,24 @@
 # http://mawcg.org
 ############################################################################################################################
 
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "PIARDOP Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
 mkdir -p $HOME/ardop
 cd $HOME/ardop
-wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc || echo "Can't download PIARDOPC" >> $BUILDLOG
+wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc || echo "*** ERROR ***  Can't download PIARDOPC" >> $1
 sudo chmod +x $HOME/ardop/piardopc
-echo "PIARDOPC installed" >> $BUILDLOG
 
+echo " " >> $1
+echo " " >> $1
+echo "PIARDOP install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

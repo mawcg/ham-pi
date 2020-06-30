@@ -11,10 +11,25 @@
 # http://mawcg.org
 ############################################################################################################################
 
-cd $DIR
-wget --no-check-certificate https://physics.princeton.edu/pulsar/k1jt/wsjtx_2.1.0_armhf.deb || echo "Can't download WSJTX" >> $BUILDLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "WSJTX Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+cd $3
+wget --no-check-certificate https://physics.princeton.edu/pulsar/k1jt/wsjtx_2.1.0_armhf.deb || echo "*** ERROR ***  Can't download WSJTX" >> $1
 sudo dpkg -i wsjtx_2.1.0_armhf.deb
 sudo apt-get --fix-broken -y install
 sudo dpkg -i wsjtx_2.1.0_armhf.deb
-echo "WSJTX installed" >> $BUILDLOG
 
+echo " " >> $1
+echo " " >> $1
+echo "WSJTX install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

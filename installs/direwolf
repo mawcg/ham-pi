@@ -11,13 +11,34 @@
 # http://mawcg.org
 ############################################################################################################################
 
-cd $HOME
-git clone https://www.github.com/wb2osz/direwolf || echo "Can't download DIREWOLF" >> $BUILDLOG
-cd $HOME/direwolf
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "DIREWOLF Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+cd $3
+git clone https://www.github.com/wb2osz/direwolf || echo "Can't download DIREWOLF" >> $1
+cd $3/direwolf
 sudo apt-get install -y libasound2-dev
 make
 sudo make install
 make install-conf
-sed -i "s/N0CALL/$CALL/" "$HOME/direwolf.conf"
-sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' $HOME/direwolf.conf
-echo "DIREWOLF installed" >> $BUILDLOG
+
+#####################################
+# Modify Config File
+#####################################
+
+sed -i "s/N0CALL/$4/" "$HOME/direwolf.conf"
+sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' $3/direwolf.conf
+
+echo " " >> $1
+echo " " >> $1
+echo "DIREWOLF install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

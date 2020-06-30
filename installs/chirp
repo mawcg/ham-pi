@@ -11,15 +11,31 @@
 # http://mawcg.org
 ############################################################################################################################
 
-cd $DIR
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "CHIRP Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing Latest Build
+#####################################
+
+cd $2
 wget https://trac.chirp.danplanet.com/chirp_daily/LATEST/
 CHIRPBUILD=$(cat index.html | grep .tar.gz | grep chirp-daily- | awk '{ print $6 }' | sed 's/.*"//' | sed 's/>//' | sed 's/[<].*$//')
 sudo apt-get -y install python-gtk2 python-serial python-libxml2
-mkdir $HOME/chirp
-cd $HOME/chirp
+mkdir $3/chirp
+cd $3/chirp
 wget https://trac.chirp.danplanet.com/chirp_daily/LATEST/$CHIRPBUILD
 tar -xzf $CHIRPBUILD
 CHIRPDIR=$(echo $CHIRPBUILD | sed 's/[.].*$//')
 cd $CHIRPDIR
 sudo python setup.py install
 
+echo " " >> $1
+echo " " >> $1
+echo "CHIRP install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

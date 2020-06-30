@@ -11,11 +11,24 @@
 # http://mawcg.org
 ############################################################################################################################
 
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "Pulse Audio Tools Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
 sudo apt-get install -y pulseaudio
 sudo apt-get install -y pavucontrol
-echo "Pulse audio installed" >> $BUILDLOG
 
-cd $DIR
+#####################################
+# Build Config File
+#####################################
+
+cd $3
 cat > tempsound <<EOF
 pcm.pulse {
 	type pulse
@@ -26,3 +39,10 @@ ctl.pulse {
 EOF
 sudo chown root:root tempsound
 sudo mv tempsound /etc/asound.conf
+
+echo " " >> $1
+echo " " >> $1
+echo "Pulse Audio Tools install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

@@ -11,13 +11,27 @@
 # http://mawcg.org
 ############################################################################################################################
 
-cd $HOME
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "GridTracker Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Download and Installing
+#####################################
+
+cd $3
 sudo apt-get install -y libgconf-2-4
 GRIDDLL=$(curl -s https://tagloomis.com/downloads/ | grep Arm | head -1 | sed 's/<p><a\ href="//' | sed 's/?.*$//')
 wget $GRIDDLL
 GRIDTAR=$(echo $GRIDDLL | sed 's/.*\///g')
 tar -xzvf $GRIDTAR
 rm *.gz
+
+#####################################
+# Creating Desktop Icon
+#####################################
 cat > gridtracker.desktop <<EOF
 [Desktop Entry]
 Name=GridTracker
@@ -34,3 +48,9 @@ EOF
 
 sudo mv gridtracker.desktop /usr/share/applications/
 
+echo " " >> $1
+echo " " >> $1
+echo "GridTracker install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

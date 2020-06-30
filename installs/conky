@@ -11,14 +11,30 @@
 # http://mawcg.org
 ############################################################################################################################
 
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "DIREWOLF Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
 sudo apt install -y conky
 sudo apt-get install -y ruby2.3
 sudo gem install gpsd_client
 sudo gem install maidenhead
-cp $MYDIR/conky/.conkyrc $HOME/.conkyrc
+cp $3/conky/.conkyrc $HOME/.conkyrc
 mkdir -p $HOME/bin/conky
-cp $MYDIR/conky/* $HOME/bin/conky/
+cp $3/conky/* $HOME/bin/conky/
 chmod +x $HOME/bin/conky/get-grid $HOME/bin/conky/temp-conv $HOME/bin/conky/get-freq $HOME/bin/conky/grid
-sed -i "s/N0CALL/$CALL/" $HOME/.conkyrc
-echo "@reboot sleep 20 && export DISPLAY=:0 && /usr/bin/conky" >> $TEMPCRON
-echo "CONKY installed" >> $BUILDLO
+sed -i "s/N0CALL/$4/" $HOME/.conkyrc
+#echo "@reboot sleep 20 && export DISPLAY=:0 && /usr/bin/conky" >> $TEMPCRON
+
+echo " " >> $1
+echo " " >> $1
+echo "CONKY install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

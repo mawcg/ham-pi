@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# P0AIX
+# M0IAX
 #
-# Script to setup and install the tools and programs needed for P0AIX
+# Script to setup and install the tools and programs needed for M0AIX
 #
 # Author: Mike Myers (K3DO)
 #
@@ -11,15 +11,35 @@
 # http://mawcg.org
 ############################################################################################################################
 
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "M0IAX Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing Needed Python Libraries
+#####################################
+
 pip3 install gps
 pip3 install maidenhead
 pip3 install psutil
 pip3 install OSGridConverter
+
+#####################################
+# Installing Application
+#####################################
+
 cd $HOME/bin
 git clone https://github.com/m0iax/JS8CallUtilities_V2.git
 chmod +x $HOME/bin/JS8CallUtilities_V2/gpsdGPSListener.py $HOME/bin/JS8CallUtilities_V2.git/JS8CallUtils_v2.py
 mv $HOME/bin/JS8CallUtilities_V2/* $HOME/bin
 rm -rf JS8CallUtilities_V2
+
+
+#####################################
+# Creating Desktop Icon
+#####################################
 
 cat > js8tools.desktop <<EOF
 [Desktop Entry]
@@ -34,5 +54,9 @@ EOF
 
 sudo mv js8tools.desktop /usr/share/applications/
 
-echo "MOIAX tools installed" >> $BUILDLOG
-
+echo " " >> $1
+echo " " >> $1
+echo "M0IAX Tools install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

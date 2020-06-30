@@ -11,25 +11,44 @@
 # http://mawcg.org
 ############################################################################################################################
 
-cd $1
-wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armhf.deb || echo "Can't download Pat Winlink" >> $BUILDLOG 
-	sudo dpkg -i $DIR/pat_0.9.0_linux_armhf.deb
-	pat http &
-	sudo killall pat
-	sudo systemctl start pat@$WHO
-	sudo systemctl enable pat@$WHO
-	#/usr/bin/pat http &
-	#sudo killall pat
-	cd $DIR
-	wget https://raw.githubusercontent.com/km4ack/patmenu/master/patlogin
-	bash patlogin
-	jq '.ax25.rig = '\"my-rig\"'' $HOME/.wl2k/config.json | jq '.ardop.rig = '\"my-rig\"'' | jq '.hamlib_rigs = {'\"my-rig\"': {"address": "127.0.0.1:4532", "network": "tcp"}}' > ~/Desktop/config.json
-	mv ~/Desktop/config.json ~/.wl2k/config.json
-	sed -i "s/\"http_addr\": \".*\",/\"http_addr\": \"0.0.0.0:8080\",/" $HOME/.wl2k/config.json
-		#enable gps in pat is gps=yes
-		if [ $GPS = "yes" ]
-		then
-		sed -i 's/"enable_http": false,/"enable_http": true,/' $HOME/.wl2k/config.json
-		fi
-		echo "Pat Winlink installed" >> $BUILDLOG
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "Pat Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
 
+#####################################
+# Installing
+#####################################
+
+cd $1
+wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armhf.deb || echo "*** ERROR ***  Can't download Pat Winlink" >> $1 
+sudo dpkg -i $DIR/pat_0.9.0_linux_armhf.deb
+pat http &
+sudo killall pat
+sudo systemctl start pat@$WHO
+sudo systemctl enable pat@$WHO
+
+cd $3
+wget https://raw.githubusercontent.com/km4ack/patmenu/master/patlogin
+bash patlogin
+jq '.ax25.rig = '\"my-rig\"'' $HOME/.wl2k/config.json | jq '.ardop.rig = '\"my-rig\"'' | jq '.hamlib_rigs = {'\"my-rig\"': {"address": "127.0.0.1:4532", "network": "tcp"}}' > ~/Desktop/config.json
+mv ~/Desktop/config.json ~/.wl2k/config.json
+sed -i "s/\"http_addr\": \".*\",/\"http_addr\": \"0.0.0.0:8080\",/" $HOME/.wl2k/config.json
+
+#####################################
+# Install GPS if selected
+#####################################
+
+#enable gps in pat is gps=yes
+if [ $GPS = "yes" ]
+then
+	sed -i 's/"enable_http": false,/"enable_http": true,/' $HOME/.wl2k/config.json
+fi
+
+echo " " >> $1
+echo " " >> $1
+echo "Pat install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

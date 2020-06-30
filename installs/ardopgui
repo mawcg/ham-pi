@@ -11,26 +11,53 @@
 # http://mawcg.org
 ############################################################################################################################
 
-mkdir -p $HOME/ardop
-cd $HOME/ardop
-wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piARDOP_GUI || echo "Can't download piARDOP_GUI" >> $BUILDLOG
-sudo chmod +x $HOME/ardop/piARDOP_GUI
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "ARDOP GUI Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+mkdir -p $3/ardop
+cd $3/ardop
+wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piARDOP_GUI || echo "*** ERROR ***  Can't download piARDOP_GUI" >> $1
+sudo chmod +x $3/ardop/piARDOP_GUI
+
+#####################################
+# Creating Desktop Icon
+#####################################
+
 cat > ardopgui.desktop <<EOF
 [Desktop Entry]
 Name=ARDOP GUI
 GenericName=ARDOP GUI
 Comment=Graphical User Interface for ARDOP modem
-Exec=$HOME/ardop/piARDOP_GUI
+Exec=$3/ardop/piARDOP_GUI
 Terminal=false
 Type=Application
 Categories=Network;HamRadio;
 EOF
 
 sudo mv ardopgui.desktop /usr/share/applications/
-FILE=$HOME/.config/G8BPQ/ARDOP_GUI.conf
-mkdir -p $HOME/.config/G8BPQ
+
+
+#####################################
+# Create Config File
+#####################################
+
+FILE=$3/.config/G8BPQ/ARDOP_GUI.conf
+mkdir -p $3/.config/G8BPQ
 touch $FILE
 echo "[General]" >> $FILE
-echo "Host=local" >> $FILE
 echo "Port=8515" >> $FILE
-echo "ARDOP-GUI installed" >> $BUILDLOG
+echo "Host=local" >> $FILE
+
+echo " " >> $1
+echo " " >> $1
+echo "ARDOP GUI install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
