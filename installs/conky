@@ -25,7 +25,21 @@ sudo apt install -y conky
 sudo apt-get install -y ruby2.3
 sudo gem install gpsd_client
 sudo gem install maidenhead
-cp $3/conky/.conkyrc $HOME/.conkyrc
+
+read -p "What is your call sign? " CALL
+
+RES=$(xdpyinfo | grep "dimensions" | awk '{ print $2 }' | sed 's/x.*$//')
+
+if [ $RES = "1920" ]
+then
+SS=conky-large
+elif [ $RES = "1280" ]
+then
+SS=conky-medium
+else
+SS=conky-small
+fi
+cp $3/conky/$SS $HOME/.conkyrc
 mkdir -p $HOME/bin/conky
 cp $3/conky/* $HOME/bin/conky/
 chmod +x $HOME/bin/conky/get-grid $HOME/bin/conky/temp-conv $HOME/bin/conky/get-freq $HOME/bin/conky/grid

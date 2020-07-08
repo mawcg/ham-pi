@@ -1,0 +1,29 @@
+#!/bin/bash
+
+############################################################################################################################
+# get-freq
+#
+# This script will use 
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+source $HOME/.config/ham-pi.cfg
+
+FREQ=$($rigctl f)
+FREQER=$(echo $FREQ | grep error)
+
+############################################################################
+# if a frequency was returned the output it.
+############################################################################
+
+if [ -z "$FREQER" ]
+then
+echo $FREQ
+else
+echo "No Radio Detected"
+fi
+
