@@ -1,17 +1,17 @@
-'aprx' 'testing the applist method' on
-'weewx' 'testing the applist method2' on
+'aprx' 'An APRS i-gate and digipeater' on
+'weewx' 'Popular Weather Web app. Works with many weather devices' on
 'darkice' 'Darkice send audio streams to streaming sites like Broadcastify.com' on
-'RTC' 'testing the applist method2' on
-'GPS' 'testing the applist method2' on
-'FLRIG' 'testing the applist method2' on
-'FieldDayLogger' 'testing the applist method2' on
-'Direwolf' 'testing the applist method2' on
-'AX25' 'testing the applist method2' on
-'HamLib' 'testing the applist method2' on
+'RTC' 'Library for using a Real Time Clock' on
+'GPS' 'Library for reading from a GPS' on
+'FLRIG' 'Rig Control on the Raspberry Pi' on
+'FieldDayLogger' 'A web based logging application for field day' on
+'Direwolf' 'Sound Card Modem' on
+'AX25' 'X25 PAcket over the Air' on
+'HamLib' 'Library used by many applications for rig control' on
 'PULSE' 'testing the applist method2' on
 'M0IAX' 'testing the applist method2' on
-'PYQSO' 'testing the applist method2' on
-'CQRLog' 'testing the applist method2' on
+'PYQSO' 'A contact logging program' on
+'CQRLog' 'A logging program' on
 'EES' 'testing the applist method2' on
 'GARIM' 'testing the applist method2' on
 'test' 'testing script that installs nothing' on

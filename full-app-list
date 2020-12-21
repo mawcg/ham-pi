@@ -1,35 +1,35 @@
-'aprx' 'bumping the applist method' on
-'weewx' 'bumping the applist method2' on
+'aprx' 'An APRS i-gate and digipeater' on
+'weewx' 'Popular Weather Web app. Works with many weather devices' on
 'darkice' 'Darkice send audio streams to streaming sites like Broadcastify.com' on
-'RTC' 'bumping the applist method2' on
-'GPS' 'bumping the applist method2' on
-'CONKY' 'bumping the applist method2' on
-'HamClock' 'bumping the applist method2' on
-'FLRIG' 'bumping the applist method2' on
-'FLDIGI' 'bumping the applist method2' on
+'RTC' 'Library for using a Real Time Clock' on
+'GPS' 'Library for reading from a GPS' on
+'CONKY' 'Desktop Widget with lots of information' on
+'HamClock' 'Full Screen Clock for Ham Radio Operators' on
+'FLRIG' 'Rig Control on the Raspberry Pi' on
+'FLDIGI' 'Many Digital Modes for HAm Radio' on
 'FLAMP' 'bumping the applist method2' on
 'FLMSG' 'bumping the applist method2' on
 'PAT' 'Web Based Winlink Client (more options if you select this)' on
-'FieldDayLogger' 'bumping the applist method2' on
-'ARDOPC' 'bumping the applist method2' on
-'ARDOPGUI' 'bumping the applist method2' on
+'FieldDayLogger' 'A web based logging application for field day' on
+'ARDOPC' 'ARDOP protocol for winlink' on
+'ARDOPGUI' 'The Pretty side of ARDOPC' on
 'WinlinkMenu' 'bumping the applist method2' on
-'Direwolf' 'bumping the applist method2' on
-'AX25' 'bumping the applist method2' on
-'HamLib' 'bumping the applist method2' on
+'Direwolf' 'Sound Card Modem' on
+'AX25' 'X25 PAcket over the Air' on
+'HamLib' 'Library used by many applications for rig control' on
 'PULSE' 'bumping the applist method2' on
-'JS8CALL' 'bumping the applist method2' on
+'JS8CALL' 'The JS8CALL low signal application' on
 'M0IAX' 'bumping the applist method2' on
-'WSJTX' 'bumping the applist method2' on
-'PYQSO' 'bumping the applist method2' on
+'WSJTX' 'FT8, JT65 and more digital modes' on
+'PYQSO' 'A contact logging program' on
 'GPREDICT' 'bumping the applist method2' on
-'CQRLog' 'bumping the applist method2' on
-'Chirp' 'bumping the applist method2' on
+'CQRLog' 'A logging program' on
+'Chirp' 'easy Programing for many radios' on
 'EES' 'bumping the applist method2' on
 'GARIM' 'bumping the applist method2' on
-'QSSTV' 'bumping the applist method2' on
-'GridTracker' 'bumping the applist method2' on
+'QSSTV' 'An SSTV receive program' on
+'GridTracker' 'A Grid Tracking Addon for WSJTX' on
 'Propagation' 'bumping the applist method2' on
 'YAAC' 'bumping the applist method2' on
-'XASTIR' 'bumping the applist method2' on
+'XASTIR' 'Mapping application for APRS' on
 'test' 'testing script that installs nothing' on
