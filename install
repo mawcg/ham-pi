@@ -1,20 +1,7 @@
 
-echo "System Update Started at `date`"
-echo "System Update Started at `date`" >> $1
-echo " "
-echo " "
-sudo apt-get update
-sudo apt-get upgrade
+echo "One moment, installing prequisites...."
 
-echo " "
-echo " "
-echo "System Update Completed at `date`"
-echo "System Update Completed at `date`" >> $1
-echo " "
-echo " "
-echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= \r\n\n"
-echo " "
-echo "System Update Complete"
-echo " "
-echo " "
+apt-get install git
 sleep 3
+
+./install-menu

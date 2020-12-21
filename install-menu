@@ -64,7 +64,7 @@ then
 DIALOG=${DIALOG=dialog}
 USEAPPLIST="$NONXAPPLIST"
 
-$DIALOG --backtitle "Ham-Pi Easy Install" --title " Non Graphical Installation" --clear --yesno "Before we get Started...  We have noticed that you are running the install script from a non graphical interface.  Many of the applications that are available to be installed require them to be run from xWindows graphical interface on the Raspberry Pi.  You can continue to run this script but you will only be presented with app that can run in this environment.  If you want to install the programs that require xWindows, click no below to quit this install and start it from a terminal window on the Pi's graphical desktop.  Continue?" 15 60
+$DIALOG --backtitle "Ham-Pi Easy Install" --title " Non Graphical Installation" --clear --yesno "Before we get Started...  We have noticed that you are running the install script from a non graphical interface.  Many of the applications that are available to be installed require them to be run from xWindows graphical interface on the Raspberry Pi.  You can continue to run this installer but you will only be presented with apps that can run in this environment.  If you want to install the programs that require xWindows, click no below to quit this install and start it from a terminal window on the Pi's graphical desktop.  Continue?" 15 60
 
 case $? in
   1)
@@ -97,7 +97,7 @@ chmod -R 755 $INSTALLTEMP
 # Show Welcome
 ############################################################################
 
-$DIALOG --backtitle "Ham-Pi Easy Install" --title " Welcome to Ham-Pi" --clear --msgbox "Hello and welcome to Ham-Pi.  This script makes it easy to isntall ham radio related software on your raspberry pi.  Here is how this works...  First you select the applications that you want to install.  Based upon the software you have selected, we will have some questions like your call sign, Grid Locator, and some other details.  Some of the questions may not be familliar to you so we have provided default answers that will work fine but are not as secure." 15 60
+$DIALOG --backtitle "Ham-Pi Easy Install" --title " Welcome to Ham-Pi" --clear --msgbox "Hello and welcome to Ham-Pi.  This installer makes it easy to install ham radio related software on your raspberry pi.  Here is how this works...  First you select the applications that you want to install.  Based upon the software you have selected, we will have some questions like your call sign, Grid Locator, and some other details.  Some of the questions may not be familliar to you so we have provided default answers that will work fine but are not as secure." 15 60
 
 
 
@@ -155,7 +155,7 @@ $installs/systemupdate $INSTALLOG | $DIALOG --backtitle "Ham-Pi Easy Install" --
 # Install the selected components
 ############################################################################
 
-#loop through all of the selections and install them
+# loop through all of the selections and install them
 # install script parameters are Logfile, Temp Install Directory, Our Directory, Callsign
 
 IFS=' ' read -r -a myarray < selected-apps
@@ -170,7 +170,7 @@ done
 exit 0 
 
 ############################################################################
-# Instalations Complete, Cleanup time
+# Installations Complete, Cleanup time
 ############################################################################
 
 sudo apt-get install -y extra-xdg-menus
@@ -183,7 +183,7 @@ rm -rf $DIR
 echo " " >> $INSTALLOG
 echo " " >> $INSTALLOG
 echo " " >> $INSTALLOG
-echo "Ham-Pi Installation Started at `date`" >> $INSTALLOG
+echo "Ham-Pi Installation Completed at `date`" >> $INSTALLOG
 echo " " >> $INSTALLOG
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
