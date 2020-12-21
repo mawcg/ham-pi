@@ -148,7 +148,7 @@ dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
 # Update system to latest version
 ############################################################################
 
-$installs/systemupdate $INSTALLOG | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Updating Local System" --clear --progressbox 20 70
+installs/systemupdate $INSTALLOG | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Updating Local System" --clear --progressbox 20 70
 
 
 ############################################################################

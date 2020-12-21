@@ -1,4 +1,10 @@
 
+
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root.  run: sudo install"
+  exit
+fi
+
 echo "One moment, installing prequisites...."
 
 apt-get install git

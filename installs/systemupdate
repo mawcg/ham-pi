@@ -21,7 +21,7 @@ echo "System Update Started at `date`"
 echo " "
 echo " "
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y upgrade
 
 echo " " >> $1
 echo " " >> $1
