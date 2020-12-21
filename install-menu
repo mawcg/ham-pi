@@ -164,7 +164,7 @@ do
     #get application name and description for title
     TITLE=`cat full-app-list | grep $i | cut -d' ' -f 1 | sed "s/'//g"`
     DESC=`cat full-app-list | grep $i | cut -d' ' -f 2- | sed 's/on//g' | sed "s/'//g"`
-    installs/$TITLE $INSTALLLOG $INSTALLTEMP $OURDIRECTORY $CALLSIGN  | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Installing $TITLE - $DESC" --clear --progressbox 20 70
+    installs/$TITLE $INSTALLOG $INSTALLTEMP $OURDIRECTORY $CALLSIGN  | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Installing $TITLE - $DESC" --clear --progressbox 20 70
 done
 
 exit 0 
