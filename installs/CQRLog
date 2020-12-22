@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# qsstv
+# crqlog
 #
-# Script to setup and install the qsstv SSTV decoder software
+# Script to setup and install the crqlog logging tool
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "QSSTV Installation Started at `date`" >> $1
+echo "CRQLOG Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,24 +21,22 @@ echo " " >> $1
 # Installing
 #####################################
 
-sudo apt-get install -y g++ libfftw3-dev qt5-default libpulse-dev libhamlib-dev libasound2-dev libv4l-dev libopenjp2-7 libopenjp2-7-dev
+echo " "
+echo "Installing Packages..."
+echo " "
 
-cd $HOME/Downloads
+sudo apt-get install -y cqrlog
 
-TAR=$(curl -s http://users.telenet.be/on4qz/qsstv/downloads/ | grep tar.gz | sed 's/.*href="//' | sed 's/">.*$//')
-wget http://users.telenet.be/on4qz/qsstv/downloads/$TAR
-SSTVTAR=$(echo $TAR | sed 's/.tar.gz//')
-tar -xvzf $TAR
-cd $SSTVTAR
-qmake
-make
-sudo make install
+echo " "
+echo "Updating Start Menu..."
+echo " "
 
-sudo sed -i 's/Education;/Network;HamRadio;/' /usr/local/share/applications/qsstv.desktop
+sed -i 's/Categories=Utility;Database;HamRadio/Categories=HamRadio/' /usr/share/applications/cqrlog.desktop
+
 
 echo " " >> $1
 echo " " >> $1
-echo "QSSTV install completed  at `date`" >> $1
+echo "CRQLOG install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

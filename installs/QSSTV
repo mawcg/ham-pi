@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# direwolf
+# qsstv
 #
-# Script to setup and install the direwolf virtual tnc
+# Script to setup and install the qsstv SSTV decoder software
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "DIREWOLF Installation Started at `date`" >> $1
+echo "QSSTV Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,24 +21,33 @@ echo " " >> $1
 # Installing
 #####################################
 
-cd $3
-git clone https://www.github.com/wb2osz/direwolf || echo "Can't download DIREWOLF" >> $1
-cd $3/direwolf
-sudo apt-get install -y libasound2-dev
-make
+echo "Downloading Packages..."
+echo " "
+
+
+sudo apt-get install -y g++ libfftw3-dev qt5-default libpulse-dev libhamlib-dev libasound2-dev libv4l-dev libopenjp2-7 libopenjp2-7-dev
+
+cd $2
+
+TAR=$(curl -s http://users.telenet.be/on4qz/qsstv/downloads/ | grep tar.gz | sed 's/.*href="//' | sed 's/">.*$//')
+wget http://users.telenet.be/on4qz/qsstv/downloads/$TAR >> $1 2>1
+
+echo " "
+echo "Installing Packages..."
+echo " "
+
+SSTVTAR=$(echo $TAR | sed 's/.tar.gz//')
+tar -xvzf $TAR
+cd $SSTVTAR
+qmake 2>$1
+make 2>$1
 sudo make install
-make install-conf
 
-#####################################
-# Modify Config File
-#####################################
-
-sed -i "s/N0CALL/$4/" "$HOME/direwolf.conf"
-sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' $3/direwolf.conf
+sudo sed -i 's/Education/HamRadio/' /usr/local/share/applications/qsstv.desktop
 
 echo " " >> $1
 echo " " >> $1
-echo "DIREWOLF install completed  at `date`" >> $1
+echo "QSSTV install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

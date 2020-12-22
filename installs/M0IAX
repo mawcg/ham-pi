@@ -21,6 +21,10 @@ echo " " >> $1
 # Installing Needed Python Libraries
 #####################################
 
+echo " "
+echo "Installing Python Packages..."
+echo " "
+
 pip3 install gps
 pip3 install maidenhead
 pip3 install psutil
@@ -30,10 +34,19 @@ pip3 install OSGridConverter
 # Installing Application
 #####################################
 
-cd $HOME/bin
-git clone https://github.com/m0iax/JS8CallUtilities_V2.git
-chmod +x $HOME/bin/JS8CallUtilities_V2/gpsdGPSListener.py $HOME/bin/JS8CallUtilities_V2.git/JS8CallUtils_v2.py
-mv $HOME/bin/JS8CallUtilities_V2/* $HOME/bin
+echo " "
+echo "Downloading..."
+echo " "
+
+if [ ! -d "$3/JS8Tools" ] 
+then
+   mkdir $3/JS8Tools 
+fi
+
+cd $3/JS8Tools
+git clone https://github.com/m0iax/JS8CallUtilities_V2.git >> $1 2>1
+chmod +x $3/JS8Tools/JS8CallUtilities_V2/gpsdGPSListener.py $3/JS8Tools/JS8CallUtilities_V2/JS8CallUtils_v2.py
+mv $3/JS8Tools/JS8CallUtilities_V2/* $3/JS8Tools
 rm -rf JS8CallUtilities_V2
 
 
@@ -41,15 +54,19 @@ rm -rf JS8CallUtilities_V2
 # Creating Desktop Icon
 #####################################
 
+echo " "
+echo "Creating Start Menu Item..."
+echo " "
+
 cat > js8tools.desktop <<EOF
 [Desktop Entry]
 Name=M0IAX JS8 Tools
 GenericName=M0IAX JS8 Tools
 Comment=GPS & Message Tool for JS8Call
-Exec=$HOME/bin/JS8CallUtils_v2.py
+Exec=$3/JS8Tools/JS8CallUtils_v2.py
 Terminal=false
 Type=Application
-Categories=Network;HamRadio;
+Categories=HamRadio;
 EOF
 
 sudo mv js8tools.desktop /usr/share/applications/

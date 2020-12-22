@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# hamlib
+# flmsg
 #
-# Script to setup and install the hamlib unix tools
+# Script to setup and install the flmsg digital application
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "HAMLIB Installation Started at `date`" >> $1
+echo "FLMSG Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,19 +21,21 @@ echo " " >> $1
 # Installing
 #####################################
 
-cd $3
-wget https://sourceforge.net/projects/hamlib/files/hamlib/3.3/hamlib-3.3.tar.gz || echo "*** ERROR ***  Can't download HAMLIB" >> $1
-tar -xzf $3/hamlib-3.3.tar.gz
-rm $3/hamlib-3.3.tar.gz
-cd $3/hamlib-3.3
-./configure
-make 
-sudo make install
-sudo ldconfig
+echo " "
+echo "Installing Packages..."
+echo " "
+
+sudo apt install -y flmsg
+
+echo " "
+echo "Updating Start Menu..."
+echo " "
+
+sed -i 's/Categories=Network;HamRadio/Categories=HamRadio/' /usr/share/applications/flmsg.desktop
 
 echo " " >> $1
 echo " " >> $1
-echo "HAMLIB install completed  at `date`" >> $1
+echo "FLMSG install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

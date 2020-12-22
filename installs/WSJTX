@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# pulse
+# WSJTX
 #
-# Script to setup and install the pulse audio tools
+# Script to setup and install the WSJTX Digital Communication program
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "Pulse Audio Tools Installation Started at `date`" >> $1
+echo "WSJTX Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,28 +21,34 @@ echo " " >> $1
 # Installing
 #####################################
 
-sudo apt-get install -y pulseaudio
-sudo apt-get install -y pavucontrol
+echo "Downloading Packages..."
+echo " "
+cd $2
+wget --no-check-certificate https://physics.princeton.edu/pulsar/k1jt/wsjtx_2.1.0_armhf.deb  >> $1 2>1
 
-#####################################
-# Build Config File
-#####################################
+echo " "
+echo "Installing Packages..."
+echo " "
 
-cd $3
-cat > tempsound <<EOF
-pcm.pulse {
-	type pulse
-	}
-ctl.pulse {
-	type pulse
-	}
-EOF
-sudo chown root:root tempsound
-sudo mv tempsound /etc/asound.conf
+sudo dpkg -i wsjtx_2.1.0_armhf.deb
+sudo apt-get --fix-broken -y install
+sudo dpkg -i wsjtx_2.1.0_armhf.deb
+
+echo " "
+echo "Updating Start Menu..."
+echo " "
+
+sed -i 's/Categories=AudioVideo;Audio;HamRadio;/Categories=HamRadio/' /usr/share/applications/wsjtx.desktop
+
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -f $2/*
 
 echo " " >> $1
 echo " " >> $1
-echo "Pulse Audio Tools install completed  at `date`" >> $1
+echo "WSJTX install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

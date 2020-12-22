@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# flmsg
+# flamp
 #
-# Script to setup and install the flmsg digital application
+# Script to setup and install the flamp digital application
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "FLMSG Installation Started at `date`" >> $1
+echo "FLAMP Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,11 +21,21 @@ echo " " >> $1
 # Installing
 #####################################
 
-sudo apt install -y flmsg
+echo " "
+echo "Installing Packages..."
+echo " "
+
+sudo apt install -y flamp
+
+echo " "
+echo "Updating Start Menu..."
+echo " "
+
+sed -i 's/Categories=Network;HamRadio/Categories=HamRadio/' /usr/share/applications/flamp.desktop
 
 echo " " >> $1
 echo " " >> $1
-echo "FLMSG install completed  at `date`" >> $1
+echo "FLAMP install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

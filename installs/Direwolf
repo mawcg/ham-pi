@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# chirp
+# direwolf
 #
-# Script to setup and install the chirp radio programming software
+# Script to setup and install the direwolf virtual tnc
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,41 +13,63 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "CHIRP Installation Started at `date`" >> $1
+echo "DIREWOLF Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
 #####################################
-# Installing Latest Build
+# Installing
+#####################################
+echo "Downloading Source Code..."
+echo " "
+
+cd $3
+git clone https://www.github.com/wb2osz/direwolf  >> $1 2>1
+cd $3/direwolf
+
+echo " "
+echo "Installing Dependencies..."
+echo " "
+sudo apt-get install cmake
+sudo apt-get install -y libasound2-dev
+sudo apt-get install libudev-dev
+
+echo " "
+echo "Compiling..."
+echo " "
+
+mkdir build
+cd build
+cmake -DUNITTEST=1 ..
+make -j4
+make test
+
+echo " "
+echo "Installing..."
+echo " "
+sudo make install
+make install-conf
+
+#####################################
+# Modify Config File
+#####################################
+mv $HOME/direwolf.conf /etc
+sed -i "s/N0CALL/$4/" "/etc/direwolf.conf"
+sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' $3/direwolf.conf
+
+#####################################
+# Cleanup Build Directory
 #####################################
 
-cd $2
-wget https://trac.chirp.danplanet.com/chirp_daily/LATEST/ >> $1 2>1
-CHIRPBUILD=$(cat index.html | grep .tar.gz | grep chirp-daily- | awk '{ print $6 }' | sed 's/.*"//' | sed 's/>//' | sed 's/[<].*$//')
-sudo apt-get -y install python-gtk2 python-serial python-libxml2 
+rm -rf $3/direwolf
 
-if [ ! -d "$3/chirp" ] 
-then
-   mkdir $3/chirp 
-fi
-
-cd $3/chirp 
-wget https://trac.chirp.danplanet.com/chirp_daily/LATEST/$CHIRPBUILD >> $1 2>1
-tar -xzf $CHIRPBUILD
-CHIRPDIR=$(echo $CHIRPBUILD | sed 's/[.].*$//')
-cd $CHIRPDIR
-sudo python setup.py install >> $1 2>1
-
-#####################################
-# modifying Menu Item
-#####################################
-
-sed -i 's/Categories=Utility;HamRadio/Categories=HamRadio/' /usr/local/share/applications/chirp.desktop
-
+echo " "
+echo "Done..."
+echo " "
 
 echo " " >> $1
 echo " " >> $1
-echo "CHIRP install completed  at `date`" >> $1
+echo "DIREWOLF install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

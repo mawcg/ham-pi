@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# crqlog
+# pulse
 #
-# Script to setup and install the crqlog logging tool
+# Script to setup and install the pulse audio tools
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "CRQLOG Installation Started at `date`" >> $1
+echo "Pulse Audio Tools Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,11 +21,42 @@ echo " " >> $1
 # Installing
 #####################################
 
-sudo apt-get install -y cqrlog
+echo " "
+echo "Installing Packages..."
+echo " "
+
+sudo apt-get install -y pulseaudio
+sudo apt-get install -y pavucontrol
+
+#####################################
+# Build Config File
+#####################################
+
+echo " "
+echo "Configuring..."
+echo " "
+
+cd $2
+cat > tempsound <<EOF
+pcm.pulse {
+	type pulse
+	}
+ctl.pulse {
+	type pulse
+	}
+EOF
+sudo chown root:root tempsound
+sudo mv tempsound /etc/asound.conf
+
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -f $2/*
 
 echo " " >> $1
 echo " " >> $1
-echo "CRQLOG install completed  at `date`" >> $1
+echo "Pulse Audio Tools install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

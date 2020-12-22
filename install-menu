@@ -11,6 +11,9 @@
 # http://mawcg.org
 ############################################################################################################################
 
+VERSION="0.5.1"
+
+echo "Version: $VERSION"
 echo "Starting up, one moment..."
 
 ############################################################################
@@ -27,15 +30,23 @@ DIALOG=${DIALOG=dialog}
 ############################################################################
 # Define Some Needed Variables
 ############################################################################
-INSTALLS=$HOME/.config/HamPi
-INSTALLTEMP=$HOME/ham-pi-temp
-INSTALLOG=$HOME/HamPi.log
+INSTALLS=/home/pi/.config/HamPi
+INSTALLTEMP=/home/pi/ham-pi-temp
+INSTALLOG=/home/pi/ham-pi/ham-pi.log
 FULLAPPLIST=full-app-list
 NONXAPPLIST=non-x-app-list
 USEAPPLIST="$FULLAPPLIST"
 WINLINKAPPLIST=winlink-apps-list
-OURDIRECTORY=$HOME/ham-pi
+OURDIRECTORY=/home/pi/ham-pi
 
+
+############################################################################
+# Create our temporary directory for installs
+############################################################################
+if [ ! -d "$INSTALLTEMP" ] 
+then
+   mkdir $INSTALLTEMP 
+fi
 
 ############################################################################
 # Start a new start location in the log
@@ -177,7 +188,12 @@ sudo apt-get install -y extra-xdg-menus
 
 crontab $TEMPCRON
 
-rm -rf $DIR
+#rm -rf $DIR
+
+if [ -d "$INSTALLTEMP" ] 
+then
+   rm -rf $INSTALLTEMP 
+fi
 
 
 echo " " >> $INSTALLOG

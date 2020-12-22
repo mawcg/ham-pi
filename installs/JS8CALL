@@ -11,17 +11,6 @@
 # http://mawcg.org
 ############################################################################################################################
 
-############################################################################################################################
-# direwolf
-#
-# Script to setup and install the direwolf virtual tnc
-#
-# Author: Mike Myers (K3DO)
-#
-# This is a project of the Mid Atlantic Wireless Communication Group
-# http://mawcg.org
-############################################################################################################################
-
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo "JS8Call Installation Started at `date`" >> $1
@@ -32,13 +21,33 @@ echo " " >> $1
 # Installing
 #####################################
 
+echo "Downloading Packages..."
+echo " "
 cd $2
-JS8LATE=$(curl -s http://files.js8call.com/latest.html | grep armhf | awk '{ print $2 }' | sed 's/href=//' | sed 's/"//g')
+JS8LATE=$(curl -s http://files.js8call.com/latest.html | grep armhf | awk '{ print $2 }' | sed 's/href=//' | sed 's/"//g') >> $1 2>1
 JS8PKG=$(curl -s http://files.js8call.com/latest.html | grep armhf | awk '{ print $2 }' | sed 's/\///g' | sed 's/href="http:files.js8call.com[0-9].[0-9].[0-9]//' | sed 's/"//')
-wget $JS8LATE || echo "*** ERROR ***  Can't Download JS8Call" >> $1
+wget $JS8LATE >> $1 2>1
+
+
+echo " "
+echo "Installing Packages..."
+echo " "
+
 sudo dpkg -i $JS8PKG
 sudo apt-get --fix-broken -y install
 sudo dpkg -i $JS8PKG
+
+echo " "
+echo "Updating Start Menu..."
+echo " "
+
+sed -i 's/Categories=AudioVideo;Audio;HamRadio;/Categories=HamRadio/' /usr/share/applications/js8call.desktop
+
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -f $2/*
 
 echo " " >> $1
 echo " " >> $1
@@ -46,4 +55,3 @@ echo "JS8Call install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-
