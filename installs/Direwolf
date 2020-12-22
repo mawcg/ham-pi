@@ -53,9 +53,9 @@ make install-conf
 #####################################
 # Modify Config File
 #####################################
-mv $HOME/direwolf.conf /etc
-sed -i "s/N0CALL/$4/" "/etc/direwolf.conf"
-sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' $3/direwolf.conf
+mv $3/direwolf.conf /etc
+sed -i "s/N0CALL/$4/" /etc/direwolf.conf
+sed -i 's/# ADEVICE  plughw:1,0/ADEVICE  plughw:1,0/' /etc/direwolf.conf
 
 #####################################
 # Cleanup Build Directory

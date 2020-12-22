@@ -21,20 +21,39 @@ echo " " >> $1
 # Installing
 #####################################
 
-cd $1
-wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armhf.deb || echo "*** ERROR ***  Can't download Pat Winlink" >> $1 
-sudo dpkg -i $DIR/pat_0.9.0_linux_armhf.deb
-pat http &
-sudo killall pat
-sudo systemctl start pat@$WHO
-sudo systemctl enable pat@$WHO
+echo " "
+echo "Downloading and Installing Application..."
+echo " "
 
-cd $3
-wget https://raw.githubusercontent.com/km4ack/patmenu/master/patlogin
-bash patlogin
-jq '.ax25.rig = '\"my-rig\"'' $HOME/.wl2k/config.json | jq '.ardop.rig = '\"my-rig\"'' | jq '.hamlib_rigs = {'\"my-rig\"': {"address": "127.0.0.1:4532", "network": "tcp"}}' > ~/Desktop/config.json
-mv ~/Desktop/config.json ~/.wl2k/config.json
-sed -i "s/\"http_addr\": \".*\",/\"http_addr\": \"0.0.0.0:8080\",/" $HOME/.wl2k/config.json
+cd $2
+wget https://github.com/la5nta/pat/releases/download/v0.9.0/pat_0.9.0_linux_armhf.deb >> $1 2>1
+sudo dpkg -i pat_0.9.0_linux_armhf.deb
+
+
+echo " "
+echo "Configuring Pat..."
+echo " "
+
+pat rmslist >> $1 2>1
+
+sudo cp -r /root/.wl2k /home/pi
+sudo chown -R pi /home/pi/.wl2k
+
+sed -i "s/mycall\":\ \"\"/mycall\":\ \"$4\"/" /home/pi/.wl2k/config.json
+sed -i "s/locator\":\ \"\"/Locator\":\ \"$5\"/" /home/pi/.wl2k/config.json
+sed -i "s/secure_login_password\":\ \"\"/secure_login_password\":\ \"$6\"/" /home/pi/.wl2k/config.json
+
+
+echo " "
+echo "Starting Pat..."
+echo " "
+
+sudo systemctl start pat@pi
+sudo systemctl enable pat@pi
+
+echo " "
+echo "Installing Shortcuts..."
+echo " "
 
 #####################################
 # Install GPS if selected
@@ -43,7 +62,7 @@ sed -i "s/\"http_addr\": \".*\",/\"http_addr\": \"0.0.0.0:8080\",/" $HOME/.wl2k/
 #enable gps in pat is gps=yes
 if [ $GPS = "yes" ]
 then
-	sed -i 's/"enable_http": false,/"enable_http": true,/' $HOME/.wl2k/config.json
+	sed -i 's/"enable_http": false,/"enable_http": true,/' /home/pi/.wl2k/config.json
 fi
 
 echo " " >> $1

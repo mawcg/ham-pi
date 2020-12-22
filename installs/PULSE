@@ -52,7 +52,7 @@ echo " "
 echo "Cleaning Up..."
 echo " "
 
-rm -f $2/*
+rm -fr $2/*
 
 echo " " >> $1
 echo " " >> $1

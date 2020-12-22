@@ -21,35 +21,59 @@ echo " " >> $1
 # Installing
 #####################################
 
-cd $3
-wget https://www.ka2ddo.org/ka2ddo/YAAC.zip
+if [ ! -d "$3/YAAC" ] 
+then
+   mkdir -p $3/YAAC 
+fi
+
+cd $3/YAAC
+
+echo " "
+echo "Installing Prerequisites..."
+echo " "
+
 sudo apt-get install -y openjdk-8-jre librxtx-java
-mkdir -p $HOME/YAAC
-cd $HOME/YAAC
+
+echo " "
+echo "Downloading and Installing Application..."
+echo " "
+
+wget https://www.ka2ddo.org/ka2ddo/YAAC.zip >> $1 2>1
+
+unzip $3/YAAC/YAAC.zip
 touch YAAC
 echo "#!/bin/bash" >> YAAC
-echo "java -jar $HOME/YAAC/YAAC.jar" >> YAAC
+echo "java -jar $3/YAAC/YAAC.jar" >> YAAC
 chmod +x YAAC
-#ln -sf $HOME/YAAC/YAAC $HOME/Desktop/YAAC
-#ln -sf $HOME/YAAC/YAAC $HOME/bin/YAAC
+
 
 #####################################
 # Create Desktop Icon
 #####################################
+
+echo " "
+echo "Creating Start Menu Item..."
+echo " "
 
 cat > yaac.desktop <<EOF
 [Desktop Entry]
 Name=YAAC
 GenericName=YAAC
 Comment=APRS Client
-Exec=$HOME/YAAC/YAAC
+Exec=$3/YAAC/YAAC
 Terminal=false
 Type=Application
-Categories=Network;HamRadio;
+Categories=HamRadio;
 EOF
 
 sudo mv yaac.desktop /usr/share/applications/
-unzip $3/YAAC.zip
+
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -f $3/YAAC/YAAC.zip
+
 
 echo " " >> $1
 echo " " >> $1

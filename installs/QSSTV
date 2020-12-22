@@ -45,6 +45,12 @@ sudo make install
 
 sudo sed -i 's/Education/HamRadio/' /usr/local/share/applications/qsstv.desktop
 
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -fr $2/*
+
 echo " " >> $1
 echo " " >> $1
 echo "QSSTV install completed  at `date`" >> $1

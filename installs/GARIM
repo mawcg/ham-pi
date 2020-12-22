@@ -21,11 +21,21 @@ echo " " >> $1
 # Download and Extract Source Code
 #####################################
 cd $3
+
+echo " "
+echo "Installing Prerequisites..."
+echo " "
+
 sudo apt-get install -y fluid
-wget https://www.whitemesa.net/garim/src/garim-1.1.tar.gz
-tar xzvf garim-1.1.tar.gz
-rm garim-1.1.tar.gz
-cd $3/garim-1.1
+
+echo " "
+echo "Downloading and Installing Application..."
+echo " "
+
+wget https://www.whitemesa.net/garim/src/garim-1.4.tar.gz 
+tar xzvf garim-1.4.tar.gz
+rm garim-1.4.tar.gz
+cd $3/garim-1.4
 
 #####################################
 # Build gARIM
@@ -44,3 +54,4 @@ echo "gARIM install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+

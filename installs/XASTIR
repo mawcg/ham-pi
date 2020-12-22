@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# x25
+# XASTIR
 #
-# Script to setup and install the x25 tools
+# Script to setup and install the XASTIR APRS Tool
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "X25 Tools  Installation Started at `date`" >> $1
+echo "XASTIR Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,13 +21,22 @@ echo " " >> $1
 # Installing
 #####################################
 
-sudo apt-get install -y ax25-tools
-echo "wl2k "$CALL" 1200 255 7 Winlink" | sudo tee -a /etc/ax25/axports
-sudo apt-get install -y ax25-apps
+echo " "
+echo "Installing Packages..."
+echo " "
+
+sudo apt-get install -y xastir
+
+echo " "
+echo "Updating Start Menu..."
+echo " "
+
+sed -i 's/Categories=Network;HamRadio/Categories=HamRadio/' /usr/share/applications/xastir.desktop
+sed -i 's/Exec=xastir/Exec=sudo xastir/' /usr/share/applications/xastir.desktop
 
 echo " " >> $1
 echo " " >> $1
-echo "X25 Tools install completed  at `date`" >> $1
+echo "XASTIR install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

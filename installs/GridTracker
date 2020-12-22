@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 
 ############################################################################################################################
 # gridtracker
@@ -21,10 +21,21 @@ echo " " >> $1
 # Download and Installing
 #####################################
 
+echo " "
+echo "Installing Prerequisites..."
+echo " "
+
+#sudo apt-get install -y libgconf-2-4
+
 cd $3
-sudo apt-get install -y libgconf-2-4
-GRIDDLL=$(curl -s https://tagloomis.com/downloads/ | grep Arm | head -1 | sed 's/<p><a\ href="//' | sed 's/?.*$//')
-wget $GRIDDLL
+
+echo " "
+echo "Downloading and Installing Application..."
+echo " "
+
+GRIDDLL=$(curl -s https://tagloomis.com/downloads/ | grep Arm) >> $1 2>1
+GRIDDLL=$(echo ${GRIDDLL##*href=\"} | sed 's/<\/a><\/p>//') >> $1 2>1
+wget $GRIDDLL >>$1 2>1 
 GRIDTAR=$(echo $GRIDDLL | sed 's/.*\///g')
 tar -xzvf $GRIDTAR
 rm *.gz
@@ -32,14 +43,19 @@ rm *.gz
 #####################################
 # Creating Desktop Icon
 #####################################
+
+
+echo " "
+echo "Creating Start Menu Item..."
+echo " "
 cat > gridtracker.desktop <<EOF
 [Desktop Entry]
 Name=GridTracker
 Comment=GridTracker
 GenericName=GridTracker, a WSJT-X Companion
-Exec=/home/pi/GridTracker/GridTracker --disable-accelerated-2d-canvas --num-raster-threads=2
-Icon=/home/pi/GridTracker/gridtracker.png
-Path=/home/pi/GridTracker
+Exec=$3/GridTracker/GridTracker --disable-accelerated-2d-canvas --num-raster-threads=2
+Icon=$3/GridTracker/gridtracker.png
+Path=$3/GridTracker
 Type=Application
 Encoding=UTF-8
 Terminal=false
