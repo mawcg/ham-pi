@@ -1,0 +1,77 @@
+#!/bin/bash
+
+############################################################################################################################
+# MeshChat
+#
+# Script to setup and install MeshChat for AREDN
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "MeshChat Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+
+echo " "
+echo "Installing Prerequisites..."
+echo " "
+
+sudo apt install -y curl apache2
+
+echo " "
+echo "Installing MsshChat..."
+echo " "
+
+cd $2
+
+wget https://s3.amazonaws.com/aredn/meshchat_1.02_all.deb
+dpkg -i meshchat_1.02_all.deb
+
+
+echo " "
+echo "Configuring..."
+echo " "
+
+
+sudo sed -i 's/LWMeshChat/Ham-Pi/' /usr/lib/cgi-bin/meshchatconfig.pm
+
+echo " "
+echo "Installing Menu..."
+echo " "
+
+cat > meshchat.desktop <<EOF
+[Desktop Entry]
+Name=MeshChat
+GenericName=AREDN MeshChat
+Comment=AREDN MeshChat
+Exec=/usr/bin/chromium-browser http://localhost/meshchat
+Terminal=false
+Type=Application
+Categories=HamRadio;
+EOF
+
+sudo mv meshchat.desktop /usr/share/applications/
+
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -fr $2/*
+
+
+echo " " >> $1
+echo " " >> $1
+echo "MeshChat install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

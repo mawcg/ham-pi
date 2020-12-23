@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# piardop
+# HAMCLOCK
 #
-# Script to setup and install the ardop protocol for winlink
+# Script to setup and install HamClock
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "PIARDOP Installation Started at `date`" >> $1
+echo "HamClock Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,14 +21,28 @@ echo " " >> $1
 # Installing
 #####################################
 
-mkdir -p $HOME/ardop
-cd $HOME/ardop
-wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc || echo "*** ERROR ***  Can't download PIARDOPC" >> $1
-sudo chmod +x $HOME/ardop/piardopc
+echo " "
+echo "Installing Dependacies..."
+echo " "
+
+sudo apt-get -y install make g++ libx11-dev
+
+echo " "
+echo "Installing HamClock..."
+echo " "
+
+cd $3
+curl -o ESPHamClock.zip http://www.clearskyinstitute.com/ham/HamClock/ESPHamClock.zip
+unzip ESPHamClock.zip
+rm ESPHamClock.zip
+cd ESPHamClock
+make -j 4 hamclock-800x480
+#sudo ./hamclock-800x480
+
 
 echo " " >> $1
 echo " " >> $1
-echo "PIARDOP install completed  at `date`" >> $1
+echo "HamClock install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

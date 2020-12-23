@@ -55,6 +55,24 @@ echo " "
 echo "Installing Shortcuts..."
 echo " "
 
+cat > pat.desktop <<EOF
+[Desktop Entry]
+Version=1.0
+Name=Echolink (PAT)
+Comment=Echolink Email Client
+GenericName=PAT an Echolink Client
+Exec=/usr/bin/chromium-browser http://localhost:8080
+Icon=$3/icons/gridtracker.png
+Type=Application
+Terminal=false
+Categories=HamRadio;
+EOF
+
+sudo cp pat.desktop /home/pi/Desktop
+sudo chmod 755 /home/pi/Desktop/pat.desktop
+sudo chown pi:pi /home/pi/Desktop/pat.desktop
+sudo mv pat.desktop /usr/share/applications/
+
 #####################################
 # Install GPS if selected
 #####################################

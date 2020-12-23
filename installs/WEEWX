@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################################################################
-# conky
+# WEEWX
 #
-# Script to setup and install the conky desktop tool
+# Script to setup and install WEEWX Weather scripts
 #
 # Author: Mike Myers (K3DO)
 #
@@ -13,7 +13,7 @@
 
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
-echo "DIREWOLF Installation Started at `date`" >> $1
+echo "WEEWX Installation Started at `date`" >> $1
 echo " " >> $1
 echo " " >> $1
 
@@ -21,34 +21,32 @@ echo " " >> $1
 # Installing
 #####################################
 
-sudo apt install -y conky
-sudo apt-get install -y ruby2.3
-sudo gem install gpsd_client
-sudo gem install maidenhead
+echo " "
+echo "Adding Repos..."
+echo " "
 
-read -p "What is your call sign? " CALL
+wget -qO - http://weewx.com/keys.html | sudo apt-key add -
+sudo wget -qO - http://weewx.com/apt/weewx.list | sudo tee /etc/apt/sources.list.d/weewx.list
+sudo apt update
 
-RES=$(xdpyinfo | grep "dimensions" | awk '{ print $2 }' | sed 's/x.*$//')
+echo " "
+echo "Installing Dependacies..."
+echo " "
 
-if [ $RES = "1920" ]
-then
-SS=conky-large
-elif [ $RES = "1280" ]
-then
-SS=conky-medium
-else
-SS=conky-small
-fi
-cp $3/conky/$SS $HOME/.conkyrc
-mkdir -p $HOME/bin/conky
-cp $3/conky/* $HOME/bin/conky/
-chmod +x $HOME/bin/conky/get-grid $HOME/bin/conky/temp-conv $HOME/bin/conky/get-freq $HOME/bin/conky/grid
-sed -i "s/N0CALL/$4/" $HOME/.conkyrc
-#echo "@reboot sleep 20 && export DISPLAY=:0 && /usr/bin/conky" >> $TEMPCRON
+sudo apt install -y apache2
+
+echo " "
+echo "Installing WeeWX..."
+echo " "
+
+sudo apt install -y weewx
+
+sudo service apache2 restart
+sudo service weewx start
 
 echo " " >> $1
 echo " " >> $1
-echo "CONKY install completed  at `date`" >> $1
+echo "WEEWX install completed  at `date`" >> $1
 echo " " >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

@@ -21,9 +21,13 @@ echo " " >> $1
 # Installing
 #####################################
 
-mkdir -p $3/ardop
+if [ ! -d "$3/ardop" ] 
+then
+   mkdir -p $3/ardop 
+fi
+
 cd $3/ardop
-wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piARDOP_GUI || echo "*** ERROR ***  Can't download piARDOP_GUI" >> $1
+wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piARDOP_GUI  >> $1 2>1
 sudo chmod +x $3/ardop/piARDOP_GUI
 
 #####################################
@@ -38,7 +42,7 @@ Comment=Graphical User Interface for ARDOP modem
 Exec=$3/ardop/piARDOP_GUI
 Terminal=false
 Type=Application
-Categories=Network;HamRadio;
+Categories=HamRadio;
 EOF
 
 sudo mv ardopgui.desktop /usr/share/applications/

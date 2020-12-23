@@ -1,0 +1,55 @@
+#!/bin/bash
+
+############################################################################################################################
+# conky
+#
+# Script to setup and install the conky desktop tool
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "CONKY Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+echo " "
+echo "Installing Packages..."
+echo " "
+
+sudo apt install -y conky
+sudo apt-get install -y ruby2.3
+sudo gem install gpsd_client
+sudo gem install maidenhead
+
+RES=$(xdpyinfo | grep "dimensions" | awk '{ print $2 }' | sed 's/x.*$//')
+
+if [ $RES = "1920" ]
+then
+SS=conky-large
+elif [ $RES = "1280" ]
+then
+SS=conky-medium
+else
+SS=conky-small
+fi
+cp $3/conky/$SS /home/pi/.conkyrc
+
+chmod +x /home/pi/ham-pi/conky/get-grid /home/pi/ham-pi/conky/temp-conv /home/pi/ham-pi/conky/get-freq /home/pi/ham-pi/conky/grid
+sed -i "s/N0CALL/$4/" /home/pi/.conkyrc
+echo "@reboot sleep 20 && export DISPLAY=:0 && /usr/bin/conky" >> $3/TEMPCRON
+
+echo " " >> $1
+echo " " >> $1
+echo "CONKY install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

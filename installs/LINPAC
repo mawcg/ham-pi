@@ -1,0 +1,85 @@
+#!/bin/bash
+
+############################################################################################################################
+# LinPac
+#
+# Script to setup and install LinPac Packet Radio Terminal
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "LINPAC Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+
+echo " "
+echo "Installing Prerequisites..."
+echo " "
+
+sudo apt-get install -y libax25 ax25-apps ax25-tools
+
+echo " "
+echo "Installing LINPAC..."
+echo " "
+
+cd $3
+
+wget -o flxmlrpc.tar.gz http://www.w1hkj.com/files/flxmlrpc/flxmlrpc-0.1.4.tar.gz >> $1 2>1
+
+tar -zxvf flxmlrpc.tar.gz
+cd flxmlrpc
+./configure --prefix=/usr/local --enable-static
+make
+sudo make install
+sudo ldconfig
+
+cd $3
+
+wget -o flrig.tar.gz http://www.w1hkj.com/files/flrig/flrig-1.3.47.tar.gz
+
+tar -zxvf flrig.tar.gz
+cd flrig
+./configure --prefix=/usr/local --enable-static
+make
+sudo make install
+
+#echo " "
+#echo "Installing Menu..."
+#echo " "
+
+#cat > meshchat.desktop <<EOF
+#[Desktop Entry]
+#Name=MeshChat
+#GenericName=AREDN MeshChat
+#Comment=AREDN MeshChat
+#Exec=/usr/bin/chromium-browser http://localhost/meshchat
+#Terminal=false
+#Type=Application
+#Categories=HamRadio;
+#EOF
+
+#sudo mv meshchat.desktop /usr/share/applications/
+
+echo " "
+echo "Cleaning Up..."
+echo " "
+
+rm -fr $2/*
+
+
+echo " " >> $1
+echo " " >> $1
+echo "LINPAC install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

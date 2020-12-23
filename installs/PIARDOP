@@ -1,0 +1,38 @@
+#!/bin/bash
+
+############################################################################################################################
+# piardop
+#
+# Script to setup and install the ardop protocol for winlink
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "PIARDOP Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+echo " "
+echo "Downloading and Installing Application..."
+echo " "
+
+mkdir -p $3/ardop
+cd $3/ardop
+wget https://www.cantab.net/users/john.wiseman/Downloads/Beta/piardopc  >> $1 2>1
+sudo chmod +x $3/ardop/piardopc
+
+echo " " >> $1
+echo " " >> $1
+echo "PIARDOP install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

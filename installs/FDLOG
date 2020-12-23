@@ -1,0 +1,59 @@
+#!/bin/bash
+
+############################################################################################################################
+# FDLOG
+#
+# Script to setup and install HamClock
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "FDLog Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+
+
+echo " "
+echo "Installing HamClock..."
+echo " "
+
+cd $3
+curl -o FDLog.zip http://www.fdlog.info/files/fdlog154c-dev.zip
+unzip FDLog.zip
+rm FDLog.zip
+cd FDLog
+
+echo " "
+echo "Installing Menu..."
+echo " "
+
+cat > FDLog.desktop <<EOF
+[Desktop Entry]
+Name=FDLog
+GenericName=FDLog Field Day Logger
+Comment=Python based Field Day Logger
+Exec=python $3/FDLog/fdlog.py
+Terminal=false
+Type=Application
+Categories=HamRadio;
+EOF
+
+sudo mv FDLog.desktop /usr/share/applications/
+
+
+echo " " >> $1
+echo " " >> $1
+echo "FDLog install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

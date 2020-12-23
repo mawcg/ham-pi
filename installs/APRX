@@ -1,0 +1,55 @@
+#!/bin/bash
+
+############################################################################################################################
+# APRX
+#
+# Script to setup and install APRX iGate and Digipeater
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "APRX Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+echo " "
+echo "Installing aprx..."
+echo " "
+
+sudo apt install -y aprx
+
+echo " "
+echo "Disabling Serial Login..."
+echo " "
+
+sudo sed -i 's/console=ttyAMA0,115200 kgdboc=ttyAMA0, 115200//' /boot/cmdLine.txt
+
+if grep -Fq "enable_uart=1" /boot/config.txt
+then
+    echo " "
+    echo "UART already enabled..."
+    echo " "
+else
+    echo " "
+    echo "Enabling UART..."
+    echo " "
+    sudo echo "enable_uart=1" >> /boot/config.txt
+fi
+
+sudo sed -i "s/N0CALL/$4/" /etc/aprx.conf
+
+echo " " >> $1
+echo " " >> $1
+echo "APRX install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

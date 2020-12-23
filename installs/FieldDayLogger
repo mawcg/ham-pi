@@ -1,0 +1,93 @@
+#!/bin/bash
+
+############################################################################################################################
+# FieldDayLogger
+#
+# Script to setup and install K4CPO Field Day Logger
+#
+# Author: Mike Myers (K3DO)
+#
+# This is a project of the Mid Atlantic Wireless Communication Group
+# http://mawcg.org
+############################################################################################################################
+
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo "K4CPO Field Day Logger Installation Started at `date`" >> $1
+echo " " >> $1
+echo " " >> $1
+
+#####################################
+# Installing
+#####################################
+
+
+echo " "
+echo "Installing Prerequisites..."
+echo " "
+
+sudo apt install -y php7.3 mariadb-server
+sudp apt install -y apache2
+
+echo " "
+echo "Installing K4CPO Field Day Logger..."
+echo " "
+
+cd $3
+git clone https://github.com/km4ack/K4CPO-FD-Logger.git
+cd K4CPO-FD-Logger
+
+echo " "
+echo "Creating Database..."
+echo " "
+
+sed -i 's/USERNAME/HPFldDayLog/' ./setup
+sed -i 's/PASSWORD/HPFldDayLogPass1234/' ./setup
+sed -i 's/USERNAME/HPFldDayLog/' ./constants.php
+sed -i 's/PASSWORD/HPFldDayLogPass1234/' ./constants.php
+bash setup
+
+
+
+sudo mkdir /var/www/html/log 
+sudo chmod 755 /var/www/html/log
+sudo chown www-data:www-data /var/www/html/log 
+cp -r * /var/www/html/log 
+
+echo " "
+echo "Installing Menu..."
+echo " "
+
+cat > fielddaylog.desktop <<EOF
+[Desktop Entry]
+Name=K4CPO FD Logger
+GenericName=K4CPO Field Day Logger
+Comment=K4CPO Field Day Logger
+Exec=/usr/bin/chromium-browser http://localhost/log
+Terminal=false
+Type=Application
+Categories=HamRadio;
+EOF
+
+sudo mv fielddaylog.desktop /usr/share/applications/
+
+cat > fielddaylogsetup.desktop <<EOF
+[Desktop Entry]
+Name=Setup K4CPO FD Logger
+GenericName=Setup K4CPO Field Day Logger
+Comment=Setup for K4CPO Field Day Logger
+Exec=/usr/bin/chromium-browser http://localhost/log/setup.php
+Terminal=false
+Type=Application
+Categories=HamRadio;
+EOF
+
+sudo mv fielddaylogsetup.desktop /usr/share/applications/
+
+
+echo " " >> $1
+echo " " >> $1
+echo "K4CPO Field Day Logger install completed  at `date`" >> $1
+echo " " >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1
+echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $1

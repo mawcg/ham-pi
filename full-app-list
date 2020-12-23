@@ -1,13 +1,13 @@
-'aprx' 'An APRS i-gate and digipeater' off
-'ARDOPC' 'ARDOP protocol for winlink' off
+'APRX' 'An APRS i-gate and digipeater' off
 'ARDOPGUI' 'The Pretty side of ARDOPC' off
 'AX25' 'X25 PAcket over the Air' off
 'Chirp' 'easy Programing for many radios' off
 'CONKY' 'Desktop Widget with lots of information' off
 'CQRLog' 'A logging program' off
-'darkice' 'Darkice send audio streams to streaming sites like Broadcastify.com' off
+'DARKICE' 'Darkice send audio streams to streaming sites like Broadcastify.com' off
 'Direwolf' 'Sound Card Modem' off
 'EES' 'bumping the applist method2' off
+'FDLOG' 'Python Based Field Day Logger' off
 'FieldDayLogger' 'A web based logging application for field day' off
 'FLAMP' 'bumping the applist method2' off
 'FLDIGI' 'Many Digital Modes for HAm Radio' off
@@ -17,18 +17,21 @@
 'GPREDICT' 'bumping the applist method2' off
 'GPS' 'Library for reading from a GPS' off
 'GridTracker' 'A Grid Tracking Addon for WSJTX' off
-'HamClock' 'Full Screen Clock for Ham Radio Operators' off
+'HAMCLOCK' 'Full Screen Clock for Ham Radio Operators' off
 'HamLib' 'Library used by many applications for rig control' off
 'JS8CALL' 'The JS8CALL low signal application' off
 'M0IAX' 'GPS & Message Tool for JS8Call' off
+'MeshMap' 'AREDN Mesh Mapping Program' off
+'MeshChat' 'AREDN Mesh Chat Tool' off
 'PAT' 'Web Based Winlink Client (more options if you select this)' off
+'PIARDOP' 'ARDOP protocol for winlink' off
 'Propagation' 'bumping the applist method2' off
 'PULSE' 'Pulse Audio Tools' off
 'PYQSO' 'A contact logging program' off
 'QSSTV' 'An SSTV receive program' off
 'RTC' 'Library for using a Real Time Clock' off
 'test' 'testing script that installs nothing' off
-'weewx' 'Popular Weather Web app. Works with many weather devices' off
+'WEEWX' 'Popular Weather Web app. Works with many weather devices' off
 'WinlinkMenu' 'bumping the applist method2' off
 'WSJTX' 'FT8, JT65 and more digital modes' off
 'XASTIR' 'Mapping application for APRS' off
