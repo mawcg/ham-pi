@@ -144,15 +144,14 @@ dialog --backtitle "Ham-Pi Easy Install" --title "Your Details" \
 --form "\nPlease fill out your details below" 25 60 16 \
 "Your Callsign:" 1 1 "" 1 25 25 30 \
 "Your Grid Square:" 2 1 "" 2 25 25 30 \
-"Database Username" 3 1 "hampi" 3 25 25 30 \
-"Database Password:" 4 1 "h@mP1Pa$$" 4 25 25 30 \
 2>answers
 
 
 ############################################################################
 # Save answers for use later
 ############################################################################
-
+CALLSIGN=`sed '1!d'` answers
+LOCATOR=`sed '2!d'` answers
 
 
 ############################################################################
@@ -175,7 +174,7 @@ do
     #get application name and description for title
     TITLE=`cat full-app-list | grep $i | cut -d' ' -f 1 | sed "s/'//g"`
     DESC=`cat full-app-list | grep $i | cut -d' ' -f 2- | sed 's/on//g' | sed "s/'//g"`
-    installs/$TITLE $INSTALLOG $INSTALLTEMP $OURDIRECTORY $CALLSIGN  | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Installing $TITLE - $DESC" --clear --progressbox 20 70
+    installs/$TITLE $INSTALLOG $INSTALLTEMP $OURDIRECTORY $CALLSIGN $LOCATOR | $DIALOG --backtitle "Ham-Pi Easy Install" --title " Installing $TITLE - $DESC" --clear --progressbox 20 70
 done
 
 exit 0 
@@ -186,9 +185,9 @@ exit 0
 
 sudo apt-get install -y extra-xdg-menus
 
-crontab $TEMPCRON
+crontab TEMPCRON
 
-#rm -rf $DIR
+rm answers
 
 if [ -d "$INSTALLTEMP" ] 
 then
@@ -206,6 +205,7 @@ echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" >> $INSTALLOG
 
 echo;echo;echo "rebooting in 5 seconds"
+echo;echo;echo "Ham-Pi Version $VERSION"
 sleep 5
-#sudo reboot
+sudo reboot
 
