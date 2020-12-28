@@ -178,8 +178,6 @@ do
     installs/$TITLE $INSTALLOG $INSTALLTEMP $OURDIRECTORY $CALLSIGN $LOCATOR | $DIALOG --backtitle "Ham-Pi Easy Install     $VERSION" --title " Installing $TITLE - $DESC" --clear --progressbox 20 70
 done
 
-exit 0 
-
 ############################################################################
 # Installations Complete, Cleanup time
 ############################################################################

@@ -25,7 +25,7 @@ echo " "
 echo "Installing Packages..."
 echo " "
 
-sudo apt install -y conky
+sudo apt-get install -y conky
 sudo apt-get install -y ruby2.3
 sudo gem install gpsd_client
 sudo gem install maidenhead
@@ -42,6 +42,9 @@ else
 SS=conky-small
 fi
 cp $3/conky/$SS /home/pi/.conkyrc
+
+touch /home/pi/Documents/mylog.txt
+chown pi:pi /home/pi/Documents/mylog.txt
 
 chmod +x /home/pi/ham-pi/conky/get-grid /home/pi/ham-pi/conky/temp-conv /home/pi/ham-pi/conky/get-freq /home/pi/ham-pi/conky/grid
 sed -i "s/N0CALL/$4/" /home/pi/.conkyrc

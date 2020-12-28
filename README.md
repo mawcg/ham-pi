@@ -2,6 +2,7 @@
 Ham-Pi is a utility that makes installing ham radio software onto a raspberry pi a very simple process that does not require any special unix skills.
 
 ## Quick Install
+*** ALWAYS *** ** Backup before installing any software **
 1. Open a terminal window on your Raspberry Pi
 2. Copy the line below:
 
@@ -20,3 +21,8 @@ wget -O - install.ham-pi.com | sudo bash
 ## More Details
 You can find more details about the project by going to [ham-pi.com](http://ham-pi.com).
 
+## Please Note....
+- This is still beta software and there will be bugs.  Please report them but be patient as we fix them.
+- This will update your Raspberry Pi with the latest operating system updates prior to installing the applications
+- This install process can take a long time depending on the speed of your Raspberry Pi, network connection or memory card.
+- A Reboot will happen automatically at the end of the install.  Be sure to close and save any work prior starting the install.

@@ -7,7 +7,12 @@ fi
 
 echo "One moment, installing prequisites...."
 
-apt-get install git
+sudo apt-get install git
 sleep 3
 
-./install-menu
+cd /home/pi
+git clone https://github.com/mawcg/ham-pi.git
+chown -R pi:pi /home/pi/ham-pi
+cd ham-pi
+
+sudo ./install-menu
