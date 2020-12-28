@@ -4,9 +4,11 @@ Ham-Pi is a utility that makes isntalling ham radio software onto a raspberry pi
 ## Quick Install
 1. Open a terminal window on your Raspberry Pi
 2. Copy the line below:
+
 '''
 wget -O - install.ham-pi.com | sudo bash 
 '''
+
 3. Paste that into your new terminal window and press enter.
 4. The install script will be downloaded and started.
 5. You might be prompted for your password to let the install start
