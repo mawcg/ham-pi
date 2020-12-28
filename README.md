@@ -18,5 +18,5 @@ wget -O - install.ham-pi.com | sudo bash
 9. Enjoy!
 
 ## More Details
-You can find more details about the project by going to ham-pi.com.
+You can find more details about the project by going to [ham-pi.com](http://ham-pi.com).
 
