@@ -27,7 +27,7 @@ echo "Installing Prerequisites..."
 echo " "
 
 sudo apt install -y php7.3 mariadb-server
-sudp apt install -y apache2
+sudo apt install -y apache2
 
 echo " "
 echo "Installing K4CPO Field Day Logger..."

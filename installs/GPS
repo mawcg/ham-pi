@@ -40,7 +40,7 @@ refclock SHM 0 offset 0.5 delay 0.2 refid NMEA
 #Ctrl-X and yes to save
 reboot
 
-sudp apt install -y curl apache2
+sudo apt install -y curl apache2
 
 echo " "
 echo "Installing MsshChat..."
