@@ -37,44 +37,6 @@ GPSD_OPTIONS=”-n”
 sudo nano /etc/chrony/chrony.conf
 #Add the following line to the end of the file:
 refclock SHM 0 offset 0.5 delay 0.2 refid NMEA
-#Ctrl-X and yes to save
-reboot
-
-sudp apt install -y curl apache2
-
-echo " "
-echo "Installing MsshChat..."
-echo " "
-
-cd $2
-
-wget https://s3.amazonaws.com/aredn/meshchat_1.02_all.deb
-dpkg -i meshchat_1.02_all.deb
-
-
-echo " "
-echo "Configuring..."
-echo " "
-
-
-sudo sed -i 's/LWMeshChat/Ham-Pi/' /usr/lib/cgi-bin/meshchatconfig.pm
-
-echo " "
-echo "Installing Menu..."
-echo " "
-
-cat > meshchat.desktop <<EOF
-[Desktop Entry]
-Name=MeshChat
-GenericName=AREDN MeshChat
-Comment=AREDN MeshChat
-Exec=/usr/bin/chromium-browser http://localhost/meshchat
-Terminal=false
-Type=Application
-Categories=HamRadio;
-EOF
-
-sudo mv meshchat.desktop /usr/share/applications/
 
 echo " "
 echo "Cleaning Up..."
