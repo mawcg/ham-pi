@@ -27,7 +27,7 @@ You can find more details about the project by going to [ham-pi.com](http://ham-
 - This install process can take a long time depending on the speed of your Raspberry Pi, network connection or memory card.
 - A Reboot will happen automatically at the end of the install.  Be sure to close and save any work prior starting the install.
 
-##Release notes - MAWCG-Ham-Pi - Version 0.5.2
+## Release notes - MAWCG-Ham-Pi - Version 0.5.2
     
 <h2>        Bug
 </h2>
