@@ -27,19 +27,19 @@ echo " "
 
 wget -qO - http://weewx.com/keys.html | sudo apt-key add -
 sudo wget -qO - http://weewx.com/apt/weewx.list | sudo tee /etc/apt/sources.list.d/weewx.list
-sudo apt update
+sudo apt-get update
 
 echo " "
 echo "Installing Dependacies..."
 echo " "
 
-sudo apt install -y apache2
+sudo apt-get install -y apache2
 
 echo " "
 echo "Installing WeeWX..."
 echo " "
 
-sudo apt install -y weewx
+sudo apt-get install -y weewx
 
 sudo service apache2 restart
 sudo service weewx start

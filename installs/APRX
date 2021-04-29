@@ -25,7 +25,7 @@ echo " "
 echo "Installing aprx..."
 echo " "
 
-sudo apt install -y aprx
+sudo apt-get install -y aprx
 
 echo " "
 echo "Disabling Serial Login..."

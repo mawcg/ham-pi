@@ -26,3 +26,14 @@ You can find more details about the project by going to [ham-pi.com](http://ham-
 - This will update your Raspberry Pi with the latest operating system updates prior to installing the applications
 - This install process can take a long time depending on the speed of your Raspberry Pi, network connection or memory card.
 - A Reboot will happen automatically at the end of the install.  Be sure to close and save any work prior starting the install.
+
+## Release notes - MAWCG-Ham-Pi - Version 0.5.2
+    
+<h2>        Bug
+</h2>
+<ul>
+<li>[<a href='https://techtactile.atlassian.net/browse/MHP-46'>MHP-46</a>] -         sudo error in FieldDayLogger
+</li>
+<li>[<a href='https://techtactile.atlassian.net/browse/MHP-47'>MHP-47</a>] -         sudo mispelling in GPS install script
+</li>
+</ul>
