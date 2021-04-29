@@ -25,7 +25,7 @@ echo " "
 echo "Installing Packages..."
 echo " "
 
-sudo apt install -y flamp
+sudo apt-get install -y flamp
 
 echo " "
 echo "Updating Start Menu..."

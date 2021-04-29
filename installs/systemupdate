@@ -22,6 +22,7 @@ echo " "
 echo " "
 sudo apt-get update
 sudo apt-get -y upgrade
+sudo dpkg --configure -a
 
 echo " " >> $1
 echo " " >> $1
